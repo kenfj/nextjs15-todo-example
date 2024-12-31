@@ -34,13 +34,7 @@ For more information on how to use Next.js, you can refer to the [Next.js docume
 
 To start the PostgreSQL dev database locally using Docker, follow these steps:
 
-1. Build the Docker containers:
-
-```bash
-docker-compose build
-```
-
-2. Start the Docker containers:
+1. Start the Docker containers:
 
 ```bash
 docker-compose up
