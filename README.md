@@ -184,11 +184,9 @@ npx prisma migrate dev --name init
 8. Run the seed script to populate the database with initial data:
 
 ```bash
-npx ts-node --compiler-options {"module":"CommonJS"} prisma/seed.ts
+npx ts-node --compiler-options '{"module":"CommonJS"}' prisma/seed.ts
 ```
 
 ### Note
 
 If you encounter an error stating that a folder called `prisma` already exists in your project when running `npx prisma init`, it is expected. The `prisma` folder and its contents have already been set up in this project. You can skip the `npx prisma init` step and proceed with the other steps.
-
-9. If you encounter an error stating that the table `public.User` does not exist in the current database when running the seed script, it may be because the migrations have not been applied. Make sure to run the `npx prisma migrate dev --name init` command before running the seed script.
