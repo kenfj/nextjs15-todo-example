@@ -1,10 +1,10 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Todo } from '@prisma/client';
 import { toast } from 'react-hot-toast';
 
 const prisma = new PrismaClient();
 
 export default async function Home() {
-  let todos = [];
+  let todos: Todo[] = [];
 
   try {
     todos = await prisma.todo.findMany();
