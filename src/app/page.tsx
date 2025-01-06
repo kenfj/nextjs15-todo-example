@@ -1,7 +1,17 @@
-import { getTodos } from '../actions/getTodos';
+import { PrismaClient } from '@prisma/client';
+import { toast } from 'react-hot-toast';
+
+const prisma = new PrismaClient();
 
 export default async function Home() {
-  const todos = await getTodos();
+  let todos = [];
+
+  try {
+    todos = await prisma.todo.findMany();
+  } catch (error) {
+    console.error(error);
+    toast.error('Failed to fetch todos');
+  }
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
