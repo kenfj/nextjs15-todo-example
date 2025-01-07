@@ -1,4 +1,5 @@
 import { PrismaClient, Todo } from '@prisma/client';
+import { inspectPrismaError } from '../utils/prismaErrorUtils';
 
 const prisma = new PrismaClient();
 
@@ -13,6 +14,7 @@ export async function fetchTodos(): Promise<TodoResponse> {
     return { todos };
   } catch (error) {
     console.error(error);
-    return { error: 'Failed to fetch todos' };
+    const detailedError = inspectPrismaError(error);
+    return { error: detailedError };
   }
 }
