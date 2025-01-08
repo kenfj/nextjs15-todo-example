@@ -8,9 +8,13 @@ type TodoResponse = {
   error?: string;
 }
 
-export async function fetchTodos(): Promise<TodoResponse> {
+export async function fetchTodos(guestUserId: string): Promise<TodoResponse> {
   try {
-    const todos = await prisma.todo.findMany();
+    const todos = await prisma.todo.findMany({
+      where: {
+        userId: Number(guestUserId),
+      },
+    });
     return { todos };
   } catch (error) {
     console.error(error);
