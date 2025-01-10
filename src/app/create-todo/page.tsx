@@ -1,4 +1,4 @@
-import TodoForm from '../../components/TodoForm';
+import TodoForm from '@/components/TodoForm';
 
 const CreateTodoPage = () => {
   return (
