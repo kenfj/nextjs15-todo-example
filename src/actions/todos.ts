@@ -21,7 +21,7 @@ export async function createTodoAction(formData: FormData) {
   const newTodo: CreateTodoData = {
     title,
     completed,
-    userId: Number(userId),
+    user: { connect: { id: Number(userId) } },
     createdAt,
     updatedAt: createdAt,
   };

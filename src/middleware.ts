@@ -18,5 +18,5 @@ export async function middleware(request: NextRequest) {
 }
 
 async function generateGuestUserId() {
-  return Math.floor(Math.random() * 1000000).toString();
+  return "1";   # guest user id is hardcoded to 1
 }
