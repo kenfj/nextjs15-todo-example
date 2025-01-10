@@ -1,8 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
 
 export async function middleware(request: NextRequest) {
   const cookieStore = await cookies();
@@ -21,12 +18,5 @@ export async function middleware(request: NextRequest) {
 }
 
 async function generateGuestUserId() {
-  const newUser = await prisma.user.create({
-    data: {
-      email: 'guest@example.com',
-      name: 'guest',
-    },
-  });
-
-  return newUser.id.toString();
+  return "1";   // guest user id is hardcoded to 1
 }
