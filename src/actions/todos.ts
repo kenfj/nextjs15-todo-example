@@ -1,8 +1,9 @@
 'use server';
 
-import { PrismaClient, Prisma } from '@prisma/client';
-import { getCookie } from '../utils/cookieUtils';
+import { Prisma,PrismaClient } from '@prisma/client';
 import { redirect } from 'next/navigation';
+
+import { getCookie } from '@/utils/cookieUtils';
 
 const prisma = new PrismaClient();
 

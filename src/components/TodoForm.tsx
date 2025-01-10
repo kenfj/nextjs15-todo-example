@@ -1,6 +1,6 @@
 'use client';
 
-import { createTodoAction } from '../actions/todos';
+import { createTodoAction } from '@/actions/todos';
 
 const TodoForm = () => {
   return (

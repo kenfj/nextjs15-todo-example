@@ -1,5 +1,6 @@
 import { PrismaClient, Todo } from '@prisma/client';
-import { inspectPrismaError } from '../utils/prismaErrorUtils';
+
+import { inspectPrismaError } from '@/utils/prismaErrorUtils';
 
 const prisma = new PrismaClient();
 

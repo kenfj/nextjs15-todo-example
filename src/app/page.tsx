@@ -1,8 +1,9 @@
-import { fetchTodos } from '../services/todoService';
-import TodoList from '../components/TodoList';
-import { toast } from 'react-hot-toast';
-import { getCookie } from '../utils/cookieUtils';
 import Link from 'next/link';
+import { toast } from 'react-hot-toast';
+
+import TodoList from '@/components/TodoList';
+import { fetchTodos } from '@/services/todoService';
+import { getCookie } from '@/utils/cookieUtils';
 
 export default async function Home() {
   const guestUserId = await getCookie('guest_user_id');
