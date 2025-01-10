@@ -18,5 +18,5 @@ export async function middleware(request: NextRequest) {
 }
 
 async function generateGuestUserId() {
-  return "1";   # guest user id is hardcoded to 1
+  return "1";   // guest user id is hardcoded to 1
 }
