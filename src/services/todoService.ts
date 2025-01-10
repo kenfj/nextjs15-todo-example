@@ -8,7 +8,11 @@ type TodoResponse = {
   error?: string;
 }
 
-export async function fetchTodos(guestUserId: string): Promise<TodoResponse> {
+export async function fetchTodos(guestUserId: string | undefined): Promise<TodoResponse> {
+  if (!guestUserId) {
+    return { todos: [] };
+  }
+
   try {
     const todos = await prisma.todo.findMany({
       where: {

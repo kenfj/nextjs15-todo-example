@@ -2,9 +2,10 @@ import { fetchTodos } from '../services/todoService';
 import TodoList from '../components/TodoList';
 import { toast } from 'react-hot-toast';
 import { getCookie } from '../utils/cookieUtils';
+import Link from 'next/link';
 
 export default async function Home() {
-  let guestUserId = await getCookie('guest_user_id');
+  const guestUserId = await getCookie('guest_user_id');
 
   const { todos, error } = await fetchTodos(guestUserId);
 
@@ -18,6 +19,9 @@ export default async function Home() {
         <h1 className="text-4xl font-bold">Todo App</h1>
         <p>Guest User ID: {guestUserId}</p>
         <TodoList todos={todos} error={error} />
+        <Link href="/create-todo">
+          <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">Create Todo</button>
+        </Link>
       </main>
     </div>
   );
