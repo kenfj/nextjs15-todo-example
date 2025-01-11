@@ -1,11 +1,10 @@
 'use server';
 
-import { Prisma,PrismaClient } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import { redirect } from 'next/navigation';
 
 import { getCookie } from '@/utils/cookieUtils';
-
-const prisma = new PrismaClient();
+import { prisma } from '@/lib/prisma';
 
 type CreateTodoData = Prisma.TodoCreateInput;
 
