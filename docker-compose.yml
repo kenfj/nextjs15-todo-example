@@ -1,6 +1,7 @@
 services:
-  postgres:
+  db:
     image: postgres:latest
+    container_name: postgres-container
     ports:
       - "5432:5432"
     environment:
@@ -14,12 +15,11 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-  app:
+  migration:
     image: node:20
-    tty: true
-    stdin_open: true
+    container_name: prisma-migration-container
     depends_on:
-      postgres:
+      db:
         condition: service_healthy
     command: >
       sh -c "
@@ -29,12 +29,14 @@ services:
       npm run prisma:seed
       "
     environment:
-      DATABASE_URL: postgres://devuser:devpassword@postgres:5432/devdb
+      DATABASE_URL: postgres://devuser:devpassword@db:5432/devdb
     volumes:
       - .:/app
     working_dir: /app
     ports:
       - "3000:3000"
+    stdin_open: true # Keeps stdin open in case any prompts happen
+    tty: true # Allocates a pseudo-terminal for output formatting
 
 volumes:
   postgres_data:
