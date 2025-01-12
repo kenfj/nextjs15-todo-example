@@ -2,11 +2,17 @@
 
 import { Prisma } from '@prisma/client';
 import { redirect } from 'next/navigation';
+import { z } from 'zod';
 
 import { prisma } from '@/lib/prisma';
 import { getCookie } from '@/utils/cookieUtils';
 
 type CreateTodoData = Prisma.TodoCreateInput;
+
+const schema = z.object({
+  title: z.string().min(3, { message: 'Title is required' }),
+  completed: z.boolean().optional(),
+});
 
 export async function createTodoAction(formData: FormData) {
   const title = formData.get('title') as string;
@@ -16,6 +22,14 @@ export async function createTodoAction(formData: FormData) {
 
   if (!userId) {
     throw new Error('User ID not found in cookies');
+  }
+
+  const validatedFields = schema.safeParse({ title, completed });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+    };
   }
 
   const newTodo: CreateTodoData = {
