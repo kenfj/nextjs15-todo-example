@@ -1,15 +1,24 @@
 'use client';
 
-import { createTodoAction } from '@/actions/todos';
+import { useActionState } from 'react';
+
+import { createTodoAction, TodoErrors } from '@/actions/todos';
+
+const initialState: TodoErrors = {
+  errors: {},
+};
 
 const TodoForm = () => {
+  const [state, formAction, pending] = useActionState(createTodoAction, initialState);
+
   return (
-    <form action={createTodoAction} className="flex flex-col gap-4">
+    <form action={formAction} className="flex flex-col gap-4">
       <div className="form-control">
         <label htmlFor="title" className="label">
           <span className="label-text">Title:</span>
         </label>
         <input type="text" id="title" name="title" className="input input-bordered" required />
+        {state.errors?.title && <p className="text-red-500">{state.errors.title}</p>}
       </div>
       <div className="form-control">
         <label htmlFor="completed" className="label cursor-pointer">
@@ -17,7 +26,7 @@ const TodoForm = () => {
           <input type="checkbox" id="completed" name="completed" className="checkbox" />
         </label>
       </div>
-      <button type="submit" className="btn btn-primary">Create Todo</button>
+      <button type="submit" className="btn btn-primary" disabled={pending}>Create Todo</button>
     </form>
   );
 };
