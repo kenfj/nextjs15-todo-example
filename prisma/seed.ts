@@ -3,8 +3,10 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  const user1 = await prisma.user.create({
-    data: {
+  const user1 = await prisma.user.upsert({
+    where: { email: 'user1@example.com' },
+    update: {},
+    create: {
       email: 'user1@example.com',
       name: 'User One',
       todos: {
@@ -16,8 +18,10 @@ async function main() {
     },
   });
 
-  const user2 = await prisma.user.create({
-    data: {
+  const user2 = await prisma.user.upsert({
+    where: { email: 'user2@example.com' },
+    update: {},
+    create: {
       email: 'user2@example.com',
       name: 'User Two',
       todos: {

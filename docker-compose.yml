@@ -24,6 +24,7 @@ services:
     command: >
       sh -c "
       set -eux &&
+      npm install &&
       npm run prisma:migrate &&
       npm run prisma:seed
       "
