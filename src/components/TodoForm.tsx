@@ -2,7 +2,8 @@
 
 import { useActionState } from 'react';
 
-import { createTodoAction, TodoErrors } from '@/actions/todos';
+import { createTodoAction } from '@/actions/todos';
+import { TodoErrors } from '@/models/todo';
 
 const initialState: TodoErrors = {
   errors: {},
