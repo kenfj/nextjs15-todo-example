@@ -3,8 +3,8 @@
 import { Prisma } from '@prisma/client';
 import { redirect } from 'next/navigation';
 
-import { getCookie } from '@/utils/cookieUtils';
 import { prisma } from '@/lib/prisma';
+import { getCookie } from '@/utils/cookieUtils';
 
 type CreateTodoData = Prisma.TodoCreateInput;
 

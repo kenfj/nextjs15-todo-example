@@ -1,7 +1,7 @@
 import { Todo } from '@prisma/client';
 
-import { inspectPrismaError } from '@/utils/prismaErrorUtils';
 import { prisma } from '@/lib/prisma';
+import { inspectPrismaError } from '@/utils/prismaErrorUtils';
 
 type TodoResponse = {
   todos?: Todo[];
