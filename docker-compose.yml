@@ -33,8 +33,6 @@ services:
     volumes:
       - .:/app
     working_dir: /app
-    ports:
-      - "3000:3000"
     stdin_open: true # Keeps stdin open in case any prompts happen
     tty: true # Allocates a pseudo-terminal for output formatting
 
