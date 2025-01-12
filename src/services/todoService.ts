@@ -1,8 +1,7 @@
-import { PrismaClient, Todo } from '@prisma/client';
+import { Todo } from '@prisma/client';
 
+import { prisma } from '@/lib/prisma';
 import { inspectPrismaError } from '@/utils/prismaErrorUtils';
-
-const prisma = new PrismaClient();
 
 type TodoResponse = {
   todos?: Todo[];
