@@ -2,8 +2,8 @@
 
 import { redirect } from 'next/navigation';
 
-import { prisma } from '@/lib/prisma';
-import { TodoErrors, TodoSchema } from '@/models/todo';
+import { TodoErrors } from '@/models/todo';
+import { saveTodo, validateTodo } from '@/services/todoService';
 import { getCookie } from '@/utils/cookieUtils';
 
 export async function createTodoAction(prevState: TodoErrors, formData: FormData) {
@@ -13,10 +13,7 @@ export async function createTodoAction(prevState: TodoErrors, formData: FormData
     throw new Error('User ID not found in cookies');
   }
 
-  const validatedFields = TodoSchema.safeParse({
-    title: formData.get('title') as string,
-    completed: formData.get('completed') === 'true',
-  });
+  const validatedFields = validateTodo(formData);
 
   if (!validatedFields.success) {
     return {
@@ -24,13 +21,11 @@ export async function createTodoAction(prevState: TodoErrors, formData: FormData
     };
   }
 
-  await prisma.todo.create({
-    data: {
-      title: validatedFields.data.title,
-      completed: validatedFields.data.completed,
-      user: { connect: { id: Number(userId) } },
-    },
-  });
+  await saveTodo({
+    ...validatedFields.data,
+    user: { connect: { id: Number(userId) } },
+  })
+
 
   redirect('/');
 }
