@@ -26,6 +26,5 @@ export async function createTodoAction(prevState: TodoErrors, formData: FormData
     user: { connect: { id: Number(userId) } },
   })
 
-
   redirect('/');
 }
