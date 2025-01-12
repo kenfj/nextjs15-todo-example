@@ -10,11 +10,15 @@ import { getCookie } from '@/utils/cookieUtils';
 type CreateTodoData = Prisma.TodoCreateInput;
 
 const schema = z.object({
-  title: z.string().min(3, { message: 'Title is required' }),
+  title: z.string().min(3, { message: 'Title must be at least 3 characters' }),
   completed: z.boolean().optional(),
 });
 
-export async function createTodoAction(formData: FormData) {
+// use only fieldErrors and skip not so useful formErrors
+type TodoFieldErrors = z.inferFlattenedErrors<typeof schema>['fieldErrors'];;
+export type TodoErrors = { "errors": TodoFieldErrors }
+
+export async function createTodoAction(prevState: TodoErrors, formData: FormData) {
   const title = formData.get('title') as string;
   const completed = formData.get('completed') === 'true';
   const userId = await getCookie('guest_user_id');

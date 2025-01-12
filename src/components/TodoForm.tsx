@@ -1,9 +1,9 @@
 'use client';
 
 import { useActionState } from 'react';
-import { createTodoAction } from '@/actions/todos';
+import { createTodoAction, TodoErrors } from '@/actions/todos';
 
-const initialState = {
+const initialState: TodoErrors = {
   errors: {},
 };
 
