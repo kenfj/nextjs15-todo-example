@@ -3,8 +3,8 @@
 import { redirect } from 'next/navigation';
 
 import { prisma } from '@/lib/prisma';
+import { TodoErrors, TodoSchema } from '@/models/todo';
 import { getCookie } from '@/utils/cookieUtils';
-import { TodoSchema, TodoErrors } from '@/models/todo';
 
 export async function createTodoAction(prevState: TodoErrors, formData: FormData) {
   const userId = await getCookie('guest_user_id');
