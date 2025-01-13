@@ -12,8 +12,10 @@ export type TodoSchemaType = z.infer<typeof TodoSchema>;
 type TodoFieldErrors = z.inferFlattenedErrors<typeof TodoSchema>['fieldErrors'];
 
 export type TodoFormState = {
+  success: boolean,
   data: TodoSchemaType,
-  errors: TodoFieldErrors,
+  zodErrors: TodoFieldErrors,
+  prismaError: string,
 };
 
 export type TodoCreateInput = Prisma.TodoCreateInput;
