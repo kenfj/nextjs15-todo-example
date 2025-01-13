@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import { toast } from 'react-hot-toast';
-import styles from './HomePage.module.css';
 
 import TodoList from '@/components/TodoList';
 import { findAllTodos } from '@/services/todoService';
 import { getCookie } from '@/utils/cookieUtils';
+
+import styles from './HomePage.module.css';
 
 export default async function Home() {
   const userId = await getCookie('user_id');

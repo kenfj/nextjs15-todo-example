@@ -1,7 +1,8 @@
 import Link from 'next/link';
-import styles from './CreateTodoPage.module.css';
 
 import TodoForm from '@/components/TodoForm';
+
+import styles from './CreateTodoPage.module.css';
 
 const CreateTodoPage = () => {
   return (
