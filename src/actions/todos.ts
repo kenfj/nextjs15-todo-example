@@ -2,21 +2,27 @@
 
 import { redirect } from 'next/navigation';
 
-import { TodoErrors } from '@/models/todo';
-import { saveTodo, validateTodo } from '@/services/todoService';
+import { TodoFormState, TodoSchema, TodoSchemaType } from '@/models/todo';
+import { saveTodo } from '@/services/todoService';
 import { getCookie } from '@/utils/cookieUtils';
 
-export async function createTodoAction(prevState: TodoErrors, formData: FormData) {
+export async function createTodoAction(prevState: TodoFormState, formData: FormData) {
   const userId = await getCookie('guest_user_id');
 
   if (!userId) {
     throw new Error('User ID not found in cookies');
   }
 
-  const validatedFields = validateTodo(formData);
+  const todoFormData: TodoSchemaType = {
+    title: `${formData.get('title')}`,
+    completed: formData.get('completed') === 'on',
+  };
+  const validatedFields = TodoSchema.safeParse(todoFormData);
 
   if (!validatedFields.success) {
     return {
+      ...prevState,
+      data: { ...todoFormData },
       errors: validatedFields.error.flatten().fieldErrors,
     };
   }

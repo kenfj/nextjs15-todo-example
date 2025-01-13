@@ -1,6 +1,6 @@
 import { Todo } from '@prisma/client';
 
-import { TodoSchema, TodoSchemaType } from '@/models/todo';
+import { TodoSchemaType } from '@/models/todo';
 import { createTodo, findAllByUserId } from '@/repositories/todo_repository';
 import { inspectPrismaError } from '@/utils/prismaErrorUtils';
 
@@ -22,13 +22,6 @@ export async function fetchTodos(guestUserId: string | undefined): Promise<TodoR
     const detailedError = inspectPrismaError(error);
     return { error: detailedError };
   }
-}
-
-export function validateTodo(formData: FormData) {
-  return TodoSchema.safeParse({
-    title: formData.get('title') as string,
-    completed: formData.get('completed') === 'true',
-  });
 }
 
 export async function saveTodo(data: TodoSchemaType, userId: number) {
