@@ -21,10 +21,7 @@ export async function createTodoAction(prevState: TodoErrors, formData: FormData
     };
   }
 
-  await saveTodo({
-    ...validatedFields.data,
-    user: { connect: { id: Number(userId) } },
-  })
+  await saveTodo(validatedFields.data, Number(userId));
 
   redirect('/');
 }

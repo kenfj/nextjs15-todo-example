@@ -1,6 +1,6 @@
 import { Todo } from '@prisma/client';
 
-import { TodoCreateInput, TodoSchema } from '@/models/todo';
+import { TodoSchema, TodoSchemaType } from '@/models/todo';
 import { createTodo, findAllByUserId } from '@/repositories/todo_repository';
 import { inspectPrismaError } from '@/utils/prismaErrorUtils';
 
@@ -31,10 +31,9 @@ export function validateTodo(formData: FormData) {
   });
 }
 
-export async function saveTodo(input: TodoCreateInput) {
+export async function saveTodo(data: TodoSchemaType, userId: number) {
   await createTodo({
-    title: input.title,
-    completed: input.completed,
-    user: { connect: { id: input.user.connect?.id } },
+    ...data,
+    user: { connect: { id: userId } },
   });
 }
