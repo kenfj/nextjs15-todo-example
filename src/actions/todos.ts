@@ -7,7 +7,7 @@ import { saveTodo } from '@/services/todoService';
 import { getCookie } from '@/utils/cookieUtils';
 
 export async function createTodoAction(prevState: TodoFormState, formData: FormData) {
-  const userId = await getCookie('guest_user_id');
+  const userId = await getCookie('user_id');
 
   if (!userId) {
     throw new Error('User ID not found in cookies');

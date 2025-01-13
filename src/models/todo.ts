@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client';
+import { Prisma, Todo } from '@prisma/client';
 import { z } from 'zod';
 
 export const TodoSchema = z.object({
@@ -19,3 +19,8 @@ export type TodoFormState = {
 };
 
 export type TodoCreateInput = Prisma.TodoCreateInput;
+
+export type TodoFetchResponse = {
+  todos?: Todo[];
+  error?: string;
+}
