@@ -11,9 +11,11 @@ export async function findAllTodos(userId: string | undefined): Promise<TodoFetc
     const todos = await findAllByUserId(Number(userId));
     return { todos };
   } catch (error) {
-    console.error(error);
     const detailedError = inspectPrismaError(error);
-    return { error: detailedError };
+    console.error(detailedError);
+    return {
+      error: (error instanceof Error) ? error.name : `${error}`,
+    };
   }
 }
 
