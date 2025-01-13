@@ -1,7 +1,7 @@
 import { Todo } from '@prisma/client';
 
-import { prisma } from '@/lib/prisma';
 import { TodoCreateInput, TodoSchema } from '@/models/todo';
+import { createTodo, findAllByUserId } from '@/repositories/todo_repository';
 import { inspectPrismaError } from '@/utils/prismaErrorUtils';
 
 type TodoResponse = {
@@ -15,11 +15,7 @@ export async function fetchTodos(guestUserId: string | undefined): Promise<TodoR
   }
 
   try {
-    const todos = await prisma.todo.findMany({
-      where: {
-        userId: Number(guestUserId),
-      },
-    });
+    const todos = await findAllByUserId(Number(guestUserId));
     return { todos };
   } catch (error) {
     console.error(error);
@@ -36,11 +32,9 @@ export function validateTodo(formData: FormData) {
 }
 
 export async function saveTodo(input: TodoCreateInput) {
-  await prisma.todo.create({
-    data: {
-      title: input.title,
-      completed: input.completed,
-      user: { connect: { id: input.user.connect?.id } },
-    },
+  await createTodo({
+    title: input.title,
+    completed: input.completed,
+    user: { connect: { id: input.user.connect?.id } },
   });
 }
