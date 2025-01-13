@@ -1,6 +1,6 @@
 import { Todo } from '@prisma/client';
 
-import { TodoSchema, TodoSchemaType, TodoFormState } from '@/models/todo';
+import { TodoFormState, TodoSchema, TodoSchemaType } from '@/models/todo';
 import { createTodo, findAllByUserId } from '@/repositories/todo_repository';
 import { inspectPrismaError } from '@/utils/prismaErrorUtils';
 
