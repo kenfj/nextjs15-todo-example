@@ -9,7 +9,7 @@ export const TodoSchema = z.object({
 export type TodoSchemaType = z.infer<typeof TodoSchema>;
 
 // use only fieldErrors and skip not so useful formErrors
-export type TodoFieldErrors = z.inferFlattenedErrors<typeof TodoSchema>['fieldErrors'];
+type TodoFieldErrors = z.inferFlattenedErrors<typeof TodoSchema>['fieldErrors'];
 
 export type TodoFormState = {
   data: TodoSchemaType,
