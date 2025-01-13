@@ -19,3 +19,8 @@ export type TodoFormState = {
 };
 
 export type TodoCreateInput = Prisma.TodoCreateInput;
+
+export type TodoFetchResponse = {
+  todos?: Todo[];
+  error?: string;
+}
