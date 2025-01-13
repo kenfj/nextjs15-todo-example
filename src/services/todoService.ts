@@ -32,12 +32,17 @@ export async function saveTodo(formData: FormData, userId: number): Promise<Todo
 
   const validatedFields = TodoSchema.safeParse(todoFormData);
 
+  const defaultResponse: TodoFormState = {
+    success: false,
+    data: todoFormData,
+    zodErrors: {},
+    prismaError: "",
+  };
+
   if (!validatedFields.success) {
     return {
-      success: false,
-      data: todoFormData,
+      ...defaultResponse,
       zodErrors: validatedFields.error.flatten().fieldErrors,
-      prismaError: "",
     };
   }
 
@@ -47,18 +52,14 @@ export async function saveTodo(formData: FormData, userId: number): Promise<Todo
       user: { connect: { id: userId } },
     });
     return {
+      ...defaultResponse,
       success: true,
-      data: todoFormData,
-      zodErrors: {},
-      prismaError: "",
     };
   } catch (error) {
     const detailedError = inspectPrismaError(error);
     console.error(detailedError);
     return {
-      success: false,
-      data: todoFormData,
-      zodErrors: {},
+      ...defaultResponse,
       prismaError: (error instanceof Error) ? error.name : `${error}`,
     };
   }
