@@ -59,7 +59,7 @@ export async function saveTodo(formData: FormData, userId: number): Promise<Todo
       success: false,
       data: todoFormData,
       zodErrors: {},
-      prismaError: detailedError,
+      prismaError: (error instanceof Error) ? error.name : `${error}`,
     };
   }
 }
