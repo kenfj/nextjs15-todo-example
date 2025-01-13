@@ -14,8 +14,8 @@ export async function createTodoAction(prevState: TodoFormState, formData: FormD
   }
 
   const todoFormData: TodoSchemaType = {
-    title: `${formData.get('title')}`,
-    completed: formData.get('completed') === 'on',
+    title: `${formData.get('title')}`,              // empty string if not defined
+    completed: formData.get('completed') === 'on',  // checkbox value is on/off
   };
   const validatedFields = TodoSchema.safeParse(todoFormData);
 
