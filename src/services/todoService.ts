@@ -53,8 +53,8 @@ export async function saveTodo(formData: FormData, userId: number): Promise<Todo
       prismaError: "",
     };
   } catch (error) {
-    console.error(error);
     const detailedError = inspectPrismaError(error);
+    console.error(detailedError);
     return {
       success: false,
       data: todoFormData,
