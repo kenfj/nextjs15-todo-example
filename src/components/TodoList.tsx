@@ -1,4 +1,5 @@
 import { Todo } from '@prisma/client';
+
 import { deleteTodoAction } from '@/actions/todos';
 
 type TodoListProps = {
@@ -15,17 +16,24 @@ const TodoList = ({ todos, error }: TodoListProps) => {
     return <div>No todos available</div>;
   }
 
+  const handleDelete = async (data : FormData) => {
+    'use server'
+    const todoId = data.get("todoId");
+    if (todoId)
+      await deleteTodoAction(Number(todoId))
+  }
+
   return (
     <ul className="list-disc pl-5">
       {todos.map((todo) => (
         <li key={todo.id} className="flex items-center justify-between">
           {todo.title}
-          <button 
-            onClick={() => deleteTodoAction(todo.id)} 
-            className="text-red-500 hover:text-red-700 ml-4"
-          >
-            &#x2716;
-          </button>
+          <form action={handleDelete}>
+            <input name="todoId" className="hidden" value={todo.id} readOnly/>
+            <button type="submit" className="text-red-500 hover:text-red-700 ml-4">
+              &#x2716;
+            </button>
+          </form>
         </li>
       ))}
     </ul>
