@@ -2,16 +2,14 @@ import Link from 'next/link';
 
 import TodoForm from '@/components/TodoForm';
 
-import styles from './CreateTodoPage.module.css';
-
 const CreateTodoPage = () => {
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        <h1 className="text-4xl font-bold">Create Todo</h1>
+    <div className="container">
+      <main className="main">
+        <h1>Create Todo</h1>
         <TodoForm />
         <Link href="/">
-          <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">Home</button>
+          <button>Home</button>
         </Link>
       </main>
     </div>

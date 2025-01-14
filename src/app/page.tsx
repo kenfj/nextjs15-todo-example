@@ -5,8 +5,6 @@ import TodoList from '@/components/TodoList';
 import { findAllTodos } from '@/services/todoService';
 import { getCookie } from '@/utils/cookieUtils';
 
-import styles from './HomePage.module.css';
-
 export default async function Home() {
   const userId = await getCookie('user_id');
 
@@ -17,8 +15,8 @@ export default async function Home() {
   }
 
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
+    <div className="container">
+      <main className="main">
         <h1>Todo App</h1>
         <p>User ID: {userId}</p>
         <TodoList todos={todos} error={error} />
