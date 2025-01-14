@@ -1,4 +1,5 @@
 import { Todo } from '@prisma/client';
+import { deleteTodoAction } from '@/actions/todos';
 
 type TodoListProps = {
   todos?: Todo[];
@@ -17,7 +18,15 @@ const TodoList = ({ todos, error }: TodoListProps) => {
   return (
     <ul className="list-disc pl-5">
       {todos.map((todo) => (
-        <li key={todo.id}>{todo.title}</li>
+        <li key={todo.id} className="flex items-center justify-between">
+          {todo.title}
+          <button 
+            onClick={() => deleteTodoAction(todo.id)} 
+            className="text-red-500 hover:text-red-700 ml-4"
+          >
+            &#x2716;
+          </button>
+        </li>
       ))}
     </ul>
   );
