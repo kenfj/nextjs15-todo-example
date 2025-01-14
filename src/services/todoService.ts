@@ -1,5 +1,5 @@
 import { TodoFetchResponse, TodoFormState, TodoSchema, TodoSchemaType } from '@/models/todo';
-import { createTodo, findAllByUserId } from '@/repositories/todo_repository';
+import { createTodo, deleteTodoById, findAllByUserId } from '@/repositories/todo_repository';
 import { inspectPrismaError } from '@/utils/prismaErrorUtils';
 
 export async function findAllTodos(userId: string | undefined): Promise<TodoFetchResponse> {
@@ -50,5 +50,15 @@ export async function saveTodo(formData: FormData, userId: number): Promise<Todo
     console.error(detailedError);
     const prismaError = (error instanceof Error) ? error.name : `${error}`;
     return { ...defaultResponse, prismaError };
+  }
+}
+
+export async function deleteTodo(todoId: number, userId: number): Promise<void> {
+  try {
+    await deleteTodoById(todoId, userId);
+  } catch (error) {
+    const detailedError = inspectPrismaError(error);
+    console.error(detailedError);
+    throw new Error((error instanceof Error) ? error.name : `${error}`);
   }
 }
