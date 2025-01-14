@@ -35,10 +35,8 @@ export async function saveTodo(formData: FormData, userId: number): Promise<Todo
   };
 
   if (!validatedFields.success) {
-    return {
-      ...defaultResponse,
-      zodErrors: validatedFields.error.flatten().fieldErrors,
-    };
+    const zodErrors = validatedFields.error.flatten().fieldErrors;
+    return { ...defaultResponse, zodErrors };
   }
 
   try {
@@ -46,16 +44,11 @@ export async function saveTodo(formData: FormData, userId: number): Promise<Todo
       ...validatedFields.data,
       user: { connect: { id: userId } },
     });
-    return {
-      ...defaultResponse,
-      success: true,
-    };
+    return { ...defaultResponse, success: true };
   } catch (error) {
     const detailedError = inspectPrismaError(error);
     console.error(detailedError);
-    return {
-      ...defaultResponse,
-      prismaError: (error instanceof Error) ? error.name : `${error}`,
-    };
+    const prismaError = (error instanceof Error) ? error.name : `${error}`;
+    return { ...defaultResponse, prismaError };
   }
 }

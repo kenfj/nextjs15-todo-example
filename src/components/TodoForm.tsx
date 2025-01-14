@@ -5,6 +5,8 @@ import { useActionState } from 'react';
 import { createTodoAction } from '@/actions/todos';
 import { TodoFormState } from '@/models/todo';
 
+import styles from './TodoForm.module.css';
+
 const initialState: TodoFormState = {
   success: false,
   data: { title: "", completed: false },
@@ -17,7 +19,7 @@ const TodoForm = () => {
   const { title, completed } = state.data;
 
   return (
-    <form action={formAction} className="flex flex-col gap-4">
+    <form action={formAction} className={styles.form}>
       <div className="form-control">
         <label htmlFor="title" className="label">
           <span className="label-text">Title:</span>
@@ -32,7 +34,7 @@ const TodoForm = () => {
         </label>
       </div>
       {state.prismaError && <p className="text-red-500">{state.prismaError}</p>}
-      <button type="submit" className="btn btn-primary" disabled={pending}>Create Todo</button>
+      <button type="submit" className={styles.button} disabled={pending}>Create Todo</button>
     </form>
   );
 };
