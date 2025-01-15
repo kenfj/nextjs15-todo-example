@@ -1,30 +1,32 @@
+import { useActionState } from 'react';
 import { Todo } from '@prisma/client';
 
 import { deleteTodoAction } from '@/actions/todos';
+import { DeleteTodoState } from '@/models/todo';
 
 type TodoListProps = {
   todos?: Todo[];
   error?: string;
 }
 
+const initialState: DeleteTodoState = {
+  success: false,
+  prismaError: "",
+};
+
 const TodoList = ({ todos, error }: TodoListProps) => {
+  const [state, formAction, pending] = useActionState(deleteTodoAction, initialState);
+
   if (error) {
     return <div className="text-red-500">{error}</div>;
   }
 
-  if (!todos || todos.length === 0) {
-    return <div>No todos available</div>;
+  if (state.prismaError) {
+    return <div className="text-red-500">{state.prismaError}</div>;
   }
 
-  const handleDelete = async (data : FormData) => {
-    'use server'
-    const todoId = data.get("todoId");
-    if (todoId) {
-      const result = await deleteTodoAction(Number(todoId));
-      if (!result.success) {
-        console.error(result.prismaError);
-      }
-    }
+  if (!todos || todos.length === 0) {
+    return <div>No todos available</div>;
   }
 
   return (
@@ -32,9 +34,9 @@ const TodoList = ({ todos, error }: TodoListProps) => {
       {todos.map((todo) => (
         <li key={todo.id} className="flex items-center justify-between">
           {todo.title}
-          <form action={handleDelete}>
+          <form action={formAction}>
             <input name="todoId" className="hidden" value={todo.id} readOnly/>
-            <button type="submit" className="text-red-500 hover:text-red-700 ml-4">
+            <button type="submit" className="text-red-500 hover:text-red-700 ml-4" disabled={pending}>
               &#x2716;
             </button>
           </form>
