@@ -1,4 +1,4 @@
-import { TodoFetchResponse, TodoFormState, TodoSchema, TodoSchemaType } from '@/models/todo';
+import { DeleteTodoState, TodoFetchResponse, TodoFormState, TodoSchema, TodoSchemaType } from '@/models/todo';
 import { createTodo, deleteTodoById, findAllByUserId } from '@/repositories/todo_repository';
 import { inspectPrismaError } from '@/utils/prismaErrorUtils';
 
@@ -53,12 +53,19 @@ export async function saveTodo(formData: FormData, userId: number): Promise<Todo
   }
 }
 
-export async function deleteTodo(todoId: number, userId: number): Promise<void> {
+export async function deleteTodo(todoId: number, userId: number): Promise<DeleteTodoState> {
+  const defaultResponse: DeleteTodoState = {
+    success: false,
+    prismaError: "",
+  };
+
   try {
     await deleteTodoById(todoId, userId);
+    return { ...defaultResponse, success: true };
   } catch (error) {
     const detailedError = inspectPrismaError(error);
     console.error(detailedError);
-    throw new Error((error instanceof Error) ? error.name : `${error}`);
+    const prismaError = (error instanceof Error) ? error.name : `${error}`;
+    return { ...defaultResponse, prismaError };
   }
 }
