@@ -14,8 +14,7 @@ export async function findAllTodos(userId: string | undefined): Promise<TodoFetc
     const detailedError = inspectPrismaError(error);
     console.error("ERROR in findAllTodos: %s", detailedError);
 
-    return {
- error: (error instanceof Error) ? error.name : `${error}` };
+    return { error: (error instanceof Error) ? error.name : `${error}` };
   }
 }
 
