@@ -1,5 +1,5 @@
-import { useActionState } from 'react';
 import { Todo } from '@prisma/client';
+import { useActionState } from 'react';
 
 import { deleteTodoAction } from '@/actions/todos';
 import { DeleteTodoState } from '@/models/todo';
