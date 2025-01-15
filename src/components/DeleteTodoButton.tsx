@@ -17,10 +17,6 @@ type DeleteTodoButtonProps = {
 const DeleteTodoButton = ({ todoId }: DeleteTodoButtonProps) => {
   const [state, formAction, pending] = useActionState(deleteTodoAction, initialState);
 
-  if (state.prismaError) {
-    return <div className="text-red-500">{state.prismaError}</div>;
-  }
-
   return (
     <form action={formAction}>
       <input name="todoId" className="hidden" value={todoId} readOnly />
