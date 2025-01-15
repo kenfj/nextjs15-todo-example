@@ -16,10 +16,7 @@ export async function createTodoAction(prevState: TodoFormState, formData: FormD
   const result = await saveTodo(formData, Number(userId));
 
   if (!result.success) {
-    return {
-      ...prevState,
-      ...result,
-    };
+    return result;
   }
 
   redirect('/');
@@ -33,20 +30,15 @@ export async function deleteTodoAction(prevState: DeleteTodoState, formData: For
   }
 
   const todoId = formData.get("todoId");
+
   if (!todoId) {
-    return {
-      ...prevState,
-      prismaError: 'Todo ID not found in form data',
-    };
+    return { success: false, prismaError: 'Todo ID not found in form data' };
   }
 
   const result = await deleteTodo(Number(todoId), Number(userId));
 
   if (!result.success) {
-    return {
-      ...prevState,
-      ...result,
-    };
+    return result;
   }
 
   redirect('/');
