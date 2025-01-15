@@ -35,7 +35,7 @@ const TodoList = ({ todos, error }: TodoListProps) => {
         <li key={todo.id} className="flex items-center justify-between">
           {todo.title}
           <form action={formAction}>
-            <input name="todoId" className="hidden" value={todo.id} readOnly/>
+            <input name="todoId" className="hidden" value={todo.id} readOnly />
             <button type="submit" className="text-red-500 hover:text-red-700 ml-4" disabled={pending}>
               &#x2716;
             </button>
