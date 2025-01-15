@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { toast } from 'react-hot-toast';
 
 import TodoList from '@/components/TodoList';
 import { findAllTodos } from '@/services/todoService';
@@ -10,16 +9,13 @@ export default async function Home() {
 
   const { todos, error } = await findAllTodos(userId);
 
-  if (error) {
-    toast.error(error);
-  }
-
   return (
     <div className="container">
       <main className="main">
         <h1>Todo App</h1>
         <p>User ID: {userId}</p>
-        <TodoList todos={todos} error={error} />
+        {error && <div className="text-red-500">{error}</div>}
+        <TodoList todos={todos} />
         <Link href="/create-todo">
           <button>Create Todo</button>
         </Link>
