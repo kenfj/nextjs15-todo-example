@@ -19,8 +19,12 @@ const TodoList = ({ todos, error }: TodoListProps) => {
   const handleDelete = async (data : FormData) => {
     'use server'
     const todoId = data.get("todoId");
-    if (todoId)
-      await deleteTodoAction(Number(todoId))
+    if (todoId) {
+      const result = await deleteTodoAction(Number(todoId));
+      if (!result.success) {
+        console.error(result.prismaError);
+      }
+    }
   }
 
   return (

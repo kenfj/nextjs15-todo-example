@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation';
 
-import { TodoFormState } from '@/models/todo';
+import { DeleteTodoState, TodoFormState } from '@/models/todo';
 import { deleteTodo, saveTodo } from '@/services/todoService';
 import { getCookie } from '@/utils/cookieUtils';
 
@@ -25,14 +25,18 @@ export async function createTodoAction(prevState: TodoFormState, formData: FormD
   redirect('/');
 }
 
-export async function deleteTodoAction(todoId: number) {
+export async function deleteTodoAction(todoId: number): Promise<DeleteTodoState> {
   const userId = await getCookie('user_id');
 
   if (!userId) {
     throw new Error('User ID not found in cookies');
   }
 
-  await deleteTodo(todoId, Number(userId));
+  const result = await deleteTodo(todoId, Number(userId));
+
+  if (!result.success) {
+    return result;
+  }
 
   redirect('/');
 }

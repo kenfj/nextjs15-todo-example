@@ -18,6 +18,11 @@ export type TodoFormState = {
   prismaError: string,
 };
 
+export type DeleteTodoState = {
+  success: boolean,
+  prismaError: string,
+};
+
 export type TodoCreateInput = Prisma.TodoCreateInput;
 
 export type TodoFetchResponse = {
