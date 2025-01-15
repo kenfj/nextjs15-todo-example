@@ -12,10 +12,10 @@ export async function findAllTodos(userId: string | undefined): Promise<TodoFetc
     return { todos };
   } catch (error) {
     const detailedError = inspectPrismaError(error);
-    console.error(detailedError);
+    console.error("ERROR in findAllTodos: %s", detailedError);
+
     return {
-      error: (error instanceof Error) ? error.name : `${error}`,
-    };
+ error: (error instanceof Error) ? error.name : `${error}` };
   }
 }
 

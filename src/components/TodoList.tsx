@@ -6,7 +6,6 @@ import { DeleteTodoState } from '@/models/todo';
 
 type TodoListProps = {
   todos?: Todo[];
-  error?: string;
 }
 
 const initialState: DeleteTodoState = {
@@ -14,12 +13,8 @@ const initialState: DeleteTodoState = {
   prismaError: "",
 };
 
-const TodoList = ({ todos, error }: TodoListProps) => {
+const TodoList = ({ todos }: TodoListProps) => {
   const [state, formAction, pending] = useActionState(deleteTodoAction, initialState);
-
-  if (error) {
-    return <div className="text-red-500">{error}</div>;
-  }
 
   if (state.prismaError) {
     return <div className="text-red-500">{state.prismaError}</div>;
