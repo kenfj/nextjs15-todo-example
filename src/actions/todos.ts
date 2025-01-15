@@ -25,17 +25,28 @@ export async function createTodoAction(prevState: TodoFormState, formData: FormD
   redirect('/');
 }
 
-export async function deleteTodoAction(todoId: number): Promise<DeleteTodoState> {
+export async function deleteTodoAction(prevState: DeleteTodoState, formData: FormData) {
   const userId = await getCookie('user_id');
 
   if (!userId) {
     throw new Error('User ID not found in cookies');
   }
 
-  const result = await deleteTodo(todoId, Number(userId));
+  const todoId = formData.get("todoId");
+  if (!todoId) {
+    return {
+      ...prevState,
+      prismaError: 'Todo ID not found in form data',
+    };
+  }
+
+  const result = await deleteTodo(Number(todoId), Number(userId));
 
   if (!result.success) {
-    return result;
+    return {
+      ...prevState,
+      ...result,
+    };
   }
 
   redirect('/');
