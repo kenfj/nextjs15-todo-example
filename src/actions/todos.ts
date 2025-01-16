@@ -32,7 +32,7 @@ export async function deleteTodoAction(prevState: DeleteTodoState, formData: For
   const todoId = formData.get("todoId");
 
   if (!todoId) {
-    return { success: false, prismaError: 'Todo ID not found in form data' };
+    return { success: false, message: 'Todo ID not found in form data' };
   }
 
   const result = await deleteTodo(Number(todoId), Number(userId));

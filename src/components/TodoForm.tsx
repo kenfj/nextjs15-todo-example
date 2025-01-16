@@ -11,7 +11,7 @@ const initialState: TodoFormState = {
   success: false,
   data: { title: "", completed: false },
   zodErrors: {},
-  prismaError: "",
+  message: "",
 };
 
 const TodoForm = () => {
@@ -33,7 +33,7 @@ const TodoForm = () => {
           <input type="checkbox" id="completed" name="completed" className="checkbox" defaultChecked={completed} />
         </label>
       </div>
-      {state.prismaError && <p className="text-red-500">{state.prismaError}</p>}
+      {state.message && <p className="text-red-500">{state.message}</p>}
       <button type="submit" className={styles.button} disabled={pending}>Create Todo</button>
     </form>
   );

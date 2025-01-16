@@ -30,7 +30,7 @@ export async function saveTodo(formData: FormData, userId: number): Promise<Todo
     success: false,
     data: todoFormData,
     zodErrors: {},
-    prismaError: "",
+    message: "",
   };
 
   if (!result.success) {
@@ -47,15 +47,15 @@ export async function saveTodo(formData: FormData, userId: number): Promise<Todo
   } catch (e) {
     const detailedError = inspectPrismaError(e);
     console.error(detailedError);
-    const prismaError = (e instanceof Error) ? e.name : `${e}`;
-    return { ...res, prismaError };
+    const message = (e instanceof Error) ? e.name : `${e}`;
+    return { ...res, message };
   }
 }
 
 export async function deleteTodo(todoId: number, userId: number): Promise<DeleteTodoState> {
   const res: DeleteTodoState = {
     success: false,
-    prismaError: "",
+    message: "",
   };
 
   try {
@@ -64,7 +64,7 @@ export async function deleteTodo(todoId: number, userId: number): Promise<Delete
   } catch (e) {
     const detailedError = inspectPrismaError(e);
     console.error(detailedError);
-    const prismaError = (e instanceof Error) ? e.name : `${e}`;
-    return { ...res, prismaError };
+    const message = (e instanceof Error) ? e.name : `${e}`;
+    return { ...res, message };
   }
 }
