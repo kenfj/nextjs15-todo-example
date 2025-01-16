@@ -15,12 +15,12 @@ export type TodoFormState = {
   success: boolean,
   data: TodoSchemaType,
   zodErrors: TodoFieldErrors,
-  prismaError: string,
+  message: string,
 };
 
 export type DeleteTodoState = {
   success: boolean,
-  prismaError: string,
+  message: string,
 };
 
 export type TodoCreateInput = Prisma.TodoCreateInput;

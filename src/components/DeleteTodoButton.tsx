@@ -7,7 +7,7 @@ import { DeleteTodoState } from '@/models/todo';
 
 const initialState: DeleteTodoState = {
   success: false,
-  prismaError: "",
+  message: "",
 };
 
 type DeleteTodoButtonProps = {
@@ -23,7 +23,7 @@ const DeleteTodoButton = ({ todoId }: DeleteTodoButtonProps) => {
       <button type="submit" className="text-red-500 hover:text-red-700 ml-4" disabled={pending}>
         &#x2716;
       </button>
-      {state.prismaError && <p className="text-red-500">{state.prismaError}</p>}
+      {state.message && <p className="text-red-500">{state.message}</p>}
     </form>
   )
 };

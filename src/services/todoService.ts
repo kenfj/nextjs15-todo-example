@@ -10,11 +10,11 @@ export async function findAllTodos(userId: string | undefined): Promise<TodoFetc
   try {
     const todos = await findAllByUserId(Number(userId));
     return { todos };
-  } catch (error) {
-    const detailedError = inspectPrismaError(error);
-    console.error("ERROR in findAllTodos: %s", detailedError);
+  } catch (e) {
+    const error = inspectPrismaError(e);
+    console.error("ERROR in findAllTodos: %s", error);
 
-    return { error: (error instanceof Error) ? error.name : `${error}` };
+    return { error: (e instanceof Error) ? e.name : `${e}` };
   }
 }
 
@@ -24,47 +24,49 @@ export async function saveTodo(formData: FormData, userId: number): Promise<Todo
     completed: formData.get('completed') === 'on',  // checkbox value is on/off
   };
 
-  const validatedFields = TodoSchema.safeParse(todoFormData);
+  const result = TodoSchema.safeParse(todoFormData);
 
-  const defaultResponse: TodoFormState = {
+  const res: TodoFormState = {
     success: false,
     data: todoFormData,
     zodErrors: {},
-    prismaError: "",
+    message: "",
   };
 
-  if (!validatedFields.success) {
-    const zodErrors = validatedFields.error.flatten().fieldErrors;
-    return { ...defaultResponse, zodErrors };
+  if (!result.success) {
+    const zodErrors = result.error.flatten().fieldErrors;
+    return { ...res, zodErrors };
   }
 
   try {
     await createTodo({
-      ...validatedFields.data,
+      ...result.data,
       user: { connect: { id: userId } },
     });
-    return { ...defaultResponse, success: true };
-  } catch (error) {
-    const detailedError = inspectPrismaError(error);
-    console.error(detailedError);
-    const prismaError = (error instanceof Error) ? error.name : `${error}`;
-    return { ...defaultResponse, prismaError };
+    return { ...res, success: true };
+  } catch (e) {
+    const error = inspectPrismaError(e);
+    console.error(error);
+
+    const message = (e instanceof Error) ? e.name : `${e}`;
+    return { ...res, message };
   }
 }
 
 export async function deleteTodo(todoId: number, userId: number): Promise<DeleteTodoState> {
-  const defaultResponse: DeleteTodoState = {
+  const res: DeleteTodoState = {
     success: false,
-    prismaError: "",
+    message: "",
   };
 
   try {
     await deleteTodoById(todoId, userId);
-    return { ...defaultResponse, success: true };
-  } catch (error) {
-    const detailedError = inspectPrismaError(error);
-    console.error(detailedError);
-    const prismaError = (error instanceof Error) ? error.name : `${error}`;
-    return { ...defaultResponse, prismaError };
+    return { ...res, success: true };
+  } catch (e) {
+    const error = inspectPrismaError(e);
+    console.error(error);
+
+    const message = (e instanceof Error) ? e.name : `${e}`;
+    return { ...res, message };
   }
 }
