@@ -11,8 +11,8 @@ export async function findAllTodos(userId: string | undefined): Promise<TodoFetc
     const todos = await findAllByUserId(Number(userId));
     return { todos };
   } catch (e) {
-    const detailedError = inspectPrismaError(e);
-    console.error("ERROR in findAllTodos: %s", detailedError);
+    const error = inspectPrismaError(e);
+    console.error("ERROR in findAllTodos: %s", error);
 
     return { error: (e instanceof Error) ? e.name : `${e}` };
   }
@@ -45,8 +45,8 @@ export async function saveTodo(formData: FormData, userId: number): Promise<Todo
     });
     return { ...res, success: true };
   } catch (e) {
-    const detailedError = inspectPrismaError(e);
-    console.error(detailedError);
+    const error = inspectPrismaError(e);
+    console.error(error);
     const message = (e instanceof Error) ? e.name : `${e}`;
     return { ...res, message };
   }
@@ -62,8 +62,8 @@ export async function deleteTodo(todoId: number, userId: number): Promise<Delete
     await deleteTodoById(todoId, userId);
     return { ...res, success: true };
   } catch (e) {
-    const detailedError = inspectPrismaError(e);
-    console.error(detailedError);
+    const error = inspectPrismaError(e);
+    console.error(error);
     const message = (e instanceof Error) ? e.name : `${e}`;
     return { ...res, message };
   }
