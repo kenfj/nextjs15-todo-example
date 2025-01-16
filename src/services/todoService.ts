@@ -47,6 +47,7 @@ export async function saveTodo(formData: FormData, userId: number): Promise<Todo
   } catch (e) {
     const error = inspectPrismaError(e);
     console.error(error);
+
     const message = (e instanceof Error) ? e.name : `${e}`;
     return { ...res, message };
   }
@@ -64,6 +65,7 @@ export async function deleteTodo(todoId: number, userId: number): Promise<Delete
   } catch (e) {
     const error = inspectPrismaError(e);
     console.error(error);
+
     const message = (e instanceof Error) ? e.name : `${e}`;
     return { ...res, message };
   }
