@@ -28,14 +28,14 @@ export async function saveTodo(formData: FormData, userId: number): Promise<Todo
 
   const res: TodoFormState = {
     success: false,
-    data: todoFormData,
-    zodErrors: {},
     message: "",
+    data: todoFormData,
+    errors: {},
   };
 
   if (!result.success) {
-    const zodErrors = result.error.flatten().fieldErrors;
-    return { ...res, zodErrors };
+    const errors = result.error.flatten().fieldErrors;
+    return { ...res, errors };
   }
 
   try {
