@@ -17,14 +17,17 @@ type DeleteTodoButtonProps = {
 const DeleteTodoButton = ({ todoId }: DeleteTodoButtonProps) => {
   const [state, formAction, pending] = useActionState(deleteTodoAction, initialState);
 
+  const handleClick = async () => {
+    await deleteTodoAction(todoId);
+  };
+
   return (
-    <form action={formAction}>
-      <input name="todoId" className="hidden" value={todoId} readOnly />
-      <button type="submit" className="text-red-500 hover:text-red-700 ml-4" disabled={pending}>
+    <>
+      <button onClick={handleClick} className="text-red-500 hover:text-red-700 ml-4" disabled={pending}>
         &#x2716;
       </button>
       {state.message && <p className="text-red-500">{state.message}</p>}
-    </form>
+    </>
   )
 };
 
