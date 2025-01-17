@@ -3,20 +3,12 @@
 import { useActionState } from 'react';
 
 import { deleteTodoAction } from '@/actions/todos';
-import { DeleteTodoState } from '@/models/todo';
-
-const initialState: DeleteTodoState = {
-  success: false,
-  message: "",
-};
 
 type DeleteTodoButtonProps = {
   todoId: number;
 }
 
 const DeleteTodoButton = ({ todoId }: DeleteTodoButtonProps) => {
-  const [state, formAction, pending] = useActionState(deleteTodoAction, initialState);
-
   const handleClick = async () => {
     await deleteTodoAction(todoId);
   };

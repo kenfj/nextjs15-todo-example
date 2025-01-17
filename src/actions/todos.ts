@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation';
 
-import { DeleteTodoState, TodoFormState } from '@/models/todo';
+import { TodoFormState } from '@/models/todo';
 import { deleteTodo, saveTodo } from '@/services/todoService';
 import { getCookie } from '@/utils/cookieUtils';
 
