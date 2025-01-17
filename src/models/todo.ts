@@ -13,9 +13,9 @@ type TodoFieldErrors = z.inferFlattenedErrors<typeof TodoSchema>['fieldErrors'];
 
 export type TodoFormState = {
   success: boolean,
-  data: TodoSchemaType,
-  zodErrors: TodoFieldErrors,
   message: string,
+  data: TodoSchemaType,
+  errors: TodoFieldErrors,
 };
 
 export type DeleteTodoState = {

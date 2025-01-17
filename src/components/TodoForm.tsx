@@ -9,9 +9,9 @@ import styles from './TodoForm.module.css';
 
 const initialState: TodoFormState = {
   success: false,
-  data: { title: "", completed: false },
-  zodErrors: {},
   message: "",
+  data: { title: "", completed: false },
+  errors: {},
 };
 
 const TodoForm = () => {
@@ -25,7 +25,7 @@ const TodoForm = () => {
           <span className="label-text">Title:</span>
         </label>
         <input type="text" id="title" name="title" className="input input-bordered" required defaultValue={title} />
-        {state.zodErrors?.title && <p className="text-red-500">{state.zodErrors.title}</p>}
+        {state.errors?.title && <p className="text-red-500">{state.errors.title}</p>}
       </div>
       <div className="form-control">
         <label htmlFor="completed" className="label cursor-pointer">
