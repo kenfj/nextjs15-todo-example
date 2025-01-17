@@ -1,7 +1,5 @@
 'use client'
 
-import { useActionState } from 'react';
-
 import { deleteTodoAction } from '@/actions/todos';
 
 type DeleteTodoButtonProps = {
