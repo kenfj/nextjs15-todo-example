@@ -1,6 +1,7 @@
 'use client'
 
-import { useActionState } from 'react';
+import { useState } from 'react';
+import { useFormStatus } from 'react-dom';
 
 import { deleteTodoAction } from '@/actions/todos';
 import { DeleteTodoState } from '@/models/todo';
@@ -15,16 +16,21 @@ type DeleteTodoButtonProps = {
 }
 
 const DeleteTodoButton = ({ todoId }: DeleteTodoButtonProps) => {
-  const [state, formAction, pending] = useActionState(deleteTodoAction, initialState);
+  const [state, setState] = useState<DeleteTodoState>(initialState);
+  const { pending } = useFormStatus();
+
+  const handleDelete = async () => {
+    const result = await deleteTodoAction(todoId);
+    setState(result);
+  };
 
   return (
-    <form action={formAction}>
-      <input name="todoId" className="hidden" value={todoId} readOnly />
-      <button type="submit" className="text-red-500 hover:text-red-700 ml-4" disabled={pending}>
+    <>
+      <button onClick={handleDelete} className="text-red-500 hover:text-red-700 ml-4" disabled={pending}>
         &#x2716;
       </button>
       {state.message && <p className="text-red-500">{state.message}</p>}
-    </form>
+    </>
   )
 };
 
