@@ -20,7 +20,7 @@ const DeleteTodoButton = ({ todoId }: DeleteTodoButtonProps) => {
   const { pending } = useFormStatus();
 
   const handleDelete = async () => {
-    const result = await deleteTodoAction(state, todoId);
+    const result = await deleteTodoAction(todoId);
     setState(result);
   };
 
