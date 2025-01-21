@@ -1,4 +1,4 @@
-import { Prisma, Todo } from '@prisma/client';
+import { Todo } from '@prisma/client';
 import { z } from 'zod';
 
 export const TodoSchema = z.object({
