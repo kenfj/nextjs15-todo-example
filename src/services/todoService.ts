@@ -60,8 +60,8 @@ export async function deleteTodo(todoId: number, userId: number): Promise<Delete
   };
 
   try {
-    await deleteTodoById(todoId, userId);
-    return { ...res, success: true };
+    const deletedTodo = await deleteTodoById(todoId, userId);
+    return { ...res, success: true, message: `Deleted todo with id: ${deletedTodo.id}` };
   } catch (e) {
     const error = inspectPrismaError(e);
     console.error(error);

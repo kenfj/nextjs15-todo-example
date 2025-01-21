@@ -23,8 +23,6 @@ export type DeleteTodoState = {
   message: string,
 };
 
-export type TodoCreateInput = Prisma.TodoCreateInput;
-
 export type TodoFetchResponse = {
   todos?: Todo[];
   error?: string;
