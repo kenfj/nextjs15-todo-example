@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
-import { TodoFormState } from '@/models/todo';
+import { TodoFormState, FuncState } from '@/models/todo';
 import { deleteTodo, saveTodo } from '@/services/todoService';
 import { getCookie } from '@/utils/cookieUtils';
 

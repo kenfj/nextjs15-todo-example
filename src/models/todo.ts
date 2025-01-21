@@ -11,19 +11,21 @@ export type TodoSchemaType = z.infer<typeof TodoSchema>;
 // use only fieldErrors and skip not so useful formErrors
 type TodoFieldErrors = z.inferFlattenedErrors<typeof TodoSchema>['fieldErrors'];
 
-export type TodoFormState = {
+export type FormState<FORMDATA, ERRORS> = {
   success: boolean,
   message: string,
-  data: TodoSchemaType,
-  errors: TodoFieldErrors,
+  data: FORMDATA,
+  errors: ERRORS,
 };
 
-export type DeleteTodoState = {
+export type TodoFormState = FormState<TodoSchemaType, TodoFieldErrors>;
+
+export type FuncState<T> = {
   success: boolean,
-  message: string,
+  message?: string,
+  data?: T,
 };
 
-export type TodoFetchResponse = {
-  todos?: Todo[];
-  error?: string;
-}
+export type DeleteTodoState = FuncState<Todo>;
+
+export type TodoFetchResponse = FuncState<Todo[]>;
