@@ -4,17 +4,17 @@ import { inspectPrismaError } from '@/utils/prismaErrorUtils';
 
 export async function findAllTodos(userId: string | undefined): Promise<TodoFetchResponse> {
   if (!userId) {
-    return { todos: [] };
+    return { success: true, data: [] };
   }
 
   try {
     const todos = await findAllByUserId(Number(userId));
-    return { todos };
+    return { success: true, data: todos };
   } catch (e) {
     const error = inspectPrismaError(e);
     console.error("ERROR in findAllTodos: %s", error);
 
-    return { error: (e instanceof Error) ? e.name : `${e}` };
+    return { success: false, message: (e instanceof Error) ? e.name : `${e}` };
   }
 }
 
