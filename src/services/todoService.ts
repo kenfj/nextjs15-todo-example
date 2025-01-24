@@ -27,14 +27,11 @@ export async function saveTodo(formData: FormData, userId: number): Promise<Todo
   const result = TodoSchema.safeParse(data);
 
   if (!result.success) {
-    const errors = result.error.flatten().fieldErrors;
-    return { data, errors };
+    return { data, errors: result.error.flatten().fieldErrors };
   }
 
   try {
-    await createTodo({
-      ...result.data,
-      user: { connect: { id: userId } },
+    await createTodo({...result.data, user: { connect: { id: userId } },
     });
     return { data };
   } catch (e) {
