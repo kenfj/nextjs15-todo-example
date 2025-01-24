@@ -6,7 +6,7 @@ import { inspectPrismaError } from '@/utils/prismaErrorUtils';
 export async function findAllTodos(): Promise<TodoFetchResponse> {
   try {
     const userId = await getUserId();
-    const todos = await findAllByUserId(Number(userId));
+    const todos = await findAllByUserId(userId);
     return { data: todos };
   } catch (e) {
     const errorDetails = inspectPrismaError(e);
@@ -30,7 +30,7 @@ export async function saveTodo(formData: FormData): Promise<TodoFormState> {
 
   try {
     const userId = await getUserId();
-    await createTodo({ ...result.data, user: { connect: { id: Number(userId) } } });
+    await createTodo({ ...result.data, user: { connect: { id: userId } } });
     return { data };
   } catch (e) {
     const errorDetails = inspectPrismaError(e);
@@ -43,7 +43,7 @@ export async function saveTodo(formData: FormData): Promise<TodoFormState> {
 export async function deleteTodo(todoId: number): Promise<DeleteTodoState> {
   try {
     const userId = await getUserId();
-    const todo = await deleteTodoById(todoId, Number(userId));
+    const todo = await deleteTodoById(todoId, userId);
     return { data: todo };
   } catch (e) {
     const errorDetails = inspectPrismaError(e);
