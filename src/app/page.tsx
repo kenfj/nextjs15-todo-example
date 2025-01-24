@@ -2,12 +2,11 @@ import Link from 'next/link';
 
 import TodoList from '@/components/TodoList';
 import { findAllTodos } from '@/services/todoService';
-import { getCookie } from '@/utils/cookieUtils';
+import { getUserId } from '@/utils/cookieUtils';
 
 export default async function Home() {
-  const userId = await getCookie('user_id');
-
-  const { data: todos, error } = await findAllTodos(userId);
+  const userId = await getUserId();
+  const { data: todos, error } = await findAllTodos();
 
   return (
     <div className="container">
