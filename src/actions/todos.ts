@@ -16,7 +16,7 @@ export async function createTodoAction(prevState: TodoFormState, formData: FormD
 
   const result = await saveTodo(formData, Number(userId));
 
-  if (!result.success) {
+  if (result.error) {
     return result;
   }
 
@@ -32,7 +32,7 @@ export async function deleteTodoAction(todoId: number): Promise<DeleteTodoState>
 
   const result = await deleteTodo(todoId, Number(userId));
 
-  if (!result.success) {
+  if (result.error) {
     return result;
   }
 
