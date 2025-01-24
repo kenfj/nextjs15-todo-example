@@ -16,7 +16,7 @@ export async function createTodoAction(prevState: TodoFormState, formData: FormD
 
   const result = await saveTodo(formData, Number(userId));
 
-  if (result.error) {
+  if (result.error || result.errors) {
     return result;
   }
 
