@@ -1,13 +1,11 @@
 import { DeleteTodoState, TodoFetchResponse, TodoFormState, TodoSchema, TodoSchemaType } from '@/models/todo';
 import { createTodo, deleteTodoById, findAllByUserId } from '@/repositories/todo_repository';
 import { inspectPrismaError } from '@/utils/prismaErrorUtils';
+import { getUserId } from '@/utils/cookieUtils';
 
-export async function findAllTodos(userId: string | undefined): Promise<TodoFetchResponse> {
-  if (!userId) {
-    return { data: [] };
-  }
-
+export async function findAllTodos(): Promise<TodoFetchResponse> {
   try {
+    const userId = await getUserId();
     const todos = await findAllByUserId(Number(userId));
     return { data: todos };
   } catch (e) {
@@ -18,7 +16,7 @@ export async function findAllTodos(userId: string | undefined): Promise<TodoFetc
   }
 }
 
-export async function saveTodo(formData: FormData, userId: number): Promise<TodoFormState> {
+export async function saveTodo(formData: FormData): Promise<TodoFormState> {
   const data: TodoSchemaType = {
     title: `${formData.get('title')}`,              // empty string if not defined
     completed: formData.get('completed') === 'on',  // checkbox value is on/off
@@ -31,8 +29,8 @@ export async function saveTodo(formData: FormData, userId: number): Promise<Todo
   }
 
   try {
-    await createTodo({...result.data, user: { connect: { id: userId } },
-    });
+    const userId = await getUserId();
+    await createTodo({ ...result.data, user: { connect: { id: Number(userId) } } });
     return { data };
   } catch (e) {
     const errorDetails = inspectPrismaError(e);
@@ -42,9 +40,10 @@ export async function saveTodo(formData: FormData, userId: number): Promise<Todo
   }
 }
 
-export async function deleteTodo(todoId: number, userId: number): Promise<DeleteTodoState> {
+export async function deleteTodo(todoId: number): Promise<DeleteTodoState> {
   try {
-    const todo = await deleteTodoById(todoId, userId);
+    const userId = await getUserId();
+    const todo = await deleteTodoById(todoId, Number(userId));
     return { data: todo };
   } catch (e) {
     const errorDetails = inspectPrismaError(e);
