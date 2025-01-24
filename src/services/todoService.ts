@@ -1,7 +1,7 @@
 import { DeleteTodoState, TodoFetchResponse, TodoFormState, TodoSchema, TodoSchemaType } from '@/models/todo';
 import { createTodo, deleteTodoById, findAllByUserId } from '@/repositories/todo_repository';
-import { inspectPrismaError } from '@/utils/prismaErrorUtils';
 import { getUserId } from '@/utils/cookieUtils';
+import { inspectPrismaError } from '@/utils/prismaErrorUtils';
 
 export async function findAllTodos(): Promise<TodoFetchResponse> {
   try {
