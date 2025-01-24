@@ -3,20 +3,12 @@
 import { useActionState } from 'react';
 
 import { createTodoAction } from '@/actions/todos';
-import { TodoFormState } from '@/models/todo';
 
 import styles from './TodoForm.module.css';
 
-const initialState: TodoFormState = {
-  success: false,
-  message: "",
-  data: { title: "", completed: false },
-  errors: {},
-};
-
 const TodoForm = () => {
-  const [state, formAction, pending] = useActionState(createTodoAction, initialState);
-  const { title, completed } = state.data;
+  const [state, formAction, pending] = useActionState(createTodoAction, {});
+  const { title, completed } = state.data ?? {};
 
   return (
     <form action={formAction} className={styles.form}>
@@ -33,7 +25,7 @@ const TodoForm = () => {
           <input type="checkbox" id="completed" name="completed" className="checkbox" defaultChecked={completed} />
         </label>
       </div>
-      {state.message && <p className="text-red-500">{state.message}</p>}
+      {state.error && <p className="text-red-500">{state.error}</p>}
       <button type="submit" className={styles.button} disabled={pending}>Create Todo</button>
     </form>
   );

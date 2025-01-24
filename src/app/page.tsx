@@ -7,14 +7,14 @@ import { getCookie } from '@/utils/cookieUtils';
 export default async function Home() {
   const userId = await getCookie('user_id');
 
-  const { data: todos, message } = await findAllTodos(userId);
+  const { data: todos, error } = await findAllTodos(userId);
 
   return (
     <div className="container">
       <main className="main">
         <h1>Todo App</h1>
         <p>User ID: {userId}</p>
-        {message && <div className="text-red-500">{message}</div>}
+        {error && <div className="text-red-500">{error}</div>}
         <TodoList todos={todos} />
         <Link href="/create-todo">
           <button>Create Todo</button>
