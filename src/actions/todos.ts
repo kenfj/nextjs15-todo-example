@@ -19,10 +19,9 @@ export async function createTodoAction(prevState: TodoFormState, formData: FormD
 export async function deleteTodoAction(todoId: number): Promise<DeleteTodoState> {
   const result = await deleteTodo(todoId);
 
-  if (result.error) {
-    return result;
+  if (!result.error) {
+    revalidatePath('/');
   }
 
-  revalidatePath('/');
   return result;
 }
