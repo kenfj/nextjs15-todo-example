@@ -19,3 +19,8 @@ export function inspectPrismaError(error: unknown): string {
     return `Unknown error: ${error}`;
   }
 }
+
+export function logPrismaError(error: unknown, context: string): void {
+  const errorDetails = inspectPrismaError(error);
+  console.error(`ERROR in ${context}: ${errorDetails}`);
+}
