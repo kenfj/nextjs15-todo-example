@@ -1,5 +1,9 @@
 import { Prisma } from '@prisma/client';
 
+export function errorName(e: unknown): string {
+  return (e instanceof Error) ? e.name : `${e}`;
+}
+
 export function inspectPrismaError(error: unknown): string {
   if (error instanceof Prisma.PrismaClientKnownRequestError) {
     return `Known Request Error: ${error.code} - ${error.name} - ${error.message}`;
