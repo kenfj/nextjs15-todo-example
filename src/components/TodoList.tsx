@@ -23,6 +23,7 @@ const TodoList = ({ todos }: TodoListProps) => {
               readOnly
             />
             <span className="ml-2">{todo.title}</span>
+            <span className="ml-2 text-xs text-gray-500">{new Date(todo.createdAt).toLocaleString()}</span>
           </div>
           <DeleteTodoButton todoId={todo.id} />
         </li>
