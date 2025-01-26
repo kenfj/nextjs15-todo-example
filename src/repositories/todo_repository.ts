@@ -6,8 +6,8 @@ export async function createTodo(input: Prisma.TodoCreateInput): Promise<Todo> {
   return await prisma.todo.create({ data: { ...input } });
 }
 
-export async function findAllByUserId(userId: number): Promise<Todo[]> {
-  return await prisma.todo.findMany({ where: { userId } });
+export async function findAllByUserId(userId: number, orderBy: keyof Todo = 'createdAt'): Promise<Todo[]> {
+  return await prisma.todo.findMany({ where: { userId }, orderBy: { [orderBy]: 'asc' } });
 }
 
 export async function deleteTodoById(todoId: number, userId: number): Promise<Todo> {
