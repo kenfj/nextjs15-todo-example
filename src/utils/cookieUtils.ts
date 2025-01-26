@@ -6,10 +6,10 @@ export async function getCookie(name: string): Promise<string | undefined> {
   return cookie ? cookie.value : undefined;
 }
 
-export async function getUserId(): Promise<number> {
+export async function getUserId(): Promise<string> {
   const userId = await getCookie('user_id');
   if (!userId) {
     throw new Error('User ID not found in cookies');
   }
-  return Number(userId);
+  return userId;
 }

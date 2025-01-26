@@ -1,5 +1,6 @@
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
+import { v4 as uuidv4 } from 'uuid';
 
 export async function middleware(request: NextRequest) {
   const cookieStore = await cookies();
@@ -18,5 +19,5 @@ export async function middleware(request: NextRequest) {
 }
 
 async function generateUserId() {
-  return "1";   // guest user id is hardcoded to 1
+  return uuidv4();
 }
