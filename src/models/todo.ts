@@ -2,7 +2,9 @@ import { Todo } from '@prisma/client';
 import { z } from 'zod';
 
 export const TodoSchema = z.object({
-  title: z.string().min(3, { message: 'Title must be at least 3 characters' }),
+  title: z.string().trim()
+    .min(3, { message: 'Title must be at least 3 characters' })
+    .max(10, { message: "Title mus be less than 10 characters for testing" }),
   completed: z.boolean().optional(),
 });
 
