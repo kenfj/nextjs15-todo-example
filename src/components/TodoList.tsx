@@ -23,9 +23,11 @@ const TodoList = ({ todos }: TodoListProps) => {
               readOnly
             />
             <span className="ml-2">{todo.title}</span>
-            <span className="ml-2 text-xs text-gray-500">{new Date(todo.createdAt).toLocaleString()}</span>
           </div>
-          <DeleteTodoButton todoId={todo.id} />
+          <div className="flex items-center">
+            <span className="ml-2 text-xs text-gray-500">{new Date(todo.createdAt).toISOString().replace('T', ' ').substring(0,19)}</span>
+            <DeleteTodoButton todoId={todo.id} />
+          </div>
         </li>
       ))}
     </ul>
