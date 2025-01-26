@@ -56,7 +56,7 @@ const TodoForm = () => {
       </div>
       {form.errors && <p className="text-red-500">{form.errors}</p>}
       {state.error && <p className="text-red-500">{state.error}</p>}
-      <button type="submit" className={styles.button} disabled={form.pending}>Create Todo</button>
+      <button type="submit" className={styles.button} disabled={pending}>Create Todo</button>
     </form>
   );
 };
