@@ -15,7 +15,15 @@ const TodoList = ({ todos }: TodoListProps) => {
     <ul className="list-disc pl-5">
       {todos.map((todo) => (
         <li key={todo.id} className="flex items-center justify-between">
-          {todo.title}
+          <div className="flex items-center">
+            <input
+              type="checkbox"
+              checked={todo.completed}
+              className={`checkbox ${todo.completed ? 'checkbox-success' : ''}`}
+              readOnly
+            />
+            <span className="ml-2">{todo.title}</span>
+          </div>
           <DeleteTodoButton todoId={todo.id} />
         </li>
       ))}
