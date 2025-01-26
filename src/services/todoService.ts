@@ -23,8 +23,11 @@ export async function saveTodo(formData: FormData): Promise<TodoFormState> {
   const result = TodoSchema.safeParse(data);
 
   if (!result.success) {
+    console.warn("server side validation error", result.error.flatten())
     return { data, errors: result.error.flatten().fieldErrors };
   }
+
+  console.info(`Saving Todo: ${JSON.stringify(result.data)}`)
 
   try {
     const userId = await getUserId();
