@@ -8,8 +8,8 @@ const CreateTodoPage = () => {
       <main className="main">
         <h1>Create Todo</h1>
         <TodoForm />
-        <Link href="/">
-          <button>Home</button>
+        <Link href="/todos">
+          <button>Todos List</button>
         </Link>
       </main>
     </div>
