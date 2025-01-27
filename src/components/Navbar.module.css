@@ -3,7 +3,7 @@
 }
 
 .nav-item {
-  @apply hover:bg-primary-focus px-3 py-2 rounded;
+  @apply hover:bg-primary px-3 py-2 rounded;
 }
 
 .navbar .container {
