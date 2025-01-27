@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation';
+
 import { getUserId } from '@/utils/cookieUtils';
 
 export default async function Home() {
