@@ -4,7 +4,7 @@ import { auth } from "@/auth";
 import SignIn from '@/components/sign-in';
 import SignOut from '@/components/sign-out';
 
-const Navbar = () => {
+const Navbar = async () => {
   const session = await auth();
 
   return (
