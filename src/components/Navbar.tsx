@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import SignIn from '@/components/sign-in';
 
 const Navbar = () => {
   const isAuthenticated = false; // Replace with actual authentication logic
@@ -18,7 +19,7 @@ const Navbar = () => {
           {isAuthenticated ? (
             <button className="btn btn-secondary">Sign Out</button>
           ) : (
-            <button className="btn btn-primary">Sign In</button>
+            <SignIn />
           )}
         </div>
       </div>
