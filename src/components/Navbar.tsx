@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import SignIn from '@/components/sign-in';
+import SignOut from '@/components/sign-out';
 
 const Navbar = () => {
   const isAuthenticated = false; // Replace with actual authentication logic
@@ -17,7 +18,7 @@ const Navbar = () => {
         </div>
         <div className={"flex-none"}>
           {isAuthenticated ? (
-            <button className="btn btn-secondary">Sign Out</button>
+            <SignOut />
           ) : (
             <SignIn />
           )}
