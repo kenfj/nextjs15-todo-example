@@ -1,7 +1,11 @@
 import Link from 'next/link';
 
-const Navbar = () => {
-  const isAuthenticated = false; // Replace with actual authentication logic
+import { auth } from "@/auth";
+import SignIn from '@/components/sign-in';
+import SignOut from '@/components/sign-out';
+
+const Navbar = async () => {
+  const session = await auth();
 
   return (
     <nav className={"navbar bg-base-300"}>
@@ -15,10 +19,10 @@ const Navbar = () => {
           </ul>
         </div>
         <div className={"flex-none"}>
-          {isAuthenticated ? (
-            <button className="btn btn-secondary">Sign Out</button>
+          {session ? (
+            <SignOut />
           ) : (
-            <button className="btn btn-primary">Sign In</button>
+            <SignIn />
           )}
         </div>
       </div>

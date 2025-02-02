@@ -1,9 +1,10 @@
 import { redirect } from 'next/navigation';
 
-import { getUserId } from '@/utils/cookieUtils';
+import { auth } from '@/auth';
 
 export default async function Home() {
-  const userId = await getUserId();
+  const session = await auth();
+  const userId = session?.user?.id;
 
   if (!userId) {
     return (
