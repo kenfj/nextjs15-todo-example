@@ -1,11 +1,13 @@
+import { auth } from '@/auth';
 import { DeleteTodoState, TodoFetchResponse, TodoFormState, TodoSchema, TodoSchemaType } from '@/models/todo';
 import { createTodo, deleteTodoById, findAllByUserId } from '@/repositories/todo_repository';
-import { getUserId } from '@/utils/cookieUtils';
 import { errorName, logPrismaError } from '@/utils/errorUtils';
 
 export async function findAllTodos(): Promise<TodoFetchResponse> {
+  const session = await auth();
+  const userId = session?.user?.id;
+
   try {
-    const userId = await getUserId();
     const todos = await findAllByUserId(userId);
     return { data: todos };
   } catch (e) {
@@ -29,8 +31,10 @@ export async function saveTodo(formData: FormData): Promise<TodoFormState> {
 
   console.info(`Saving Todo: ${JSON.stringify(result.data)}`)
 
+  const session = await auth();
+  const userId = session?.user?.id;
+
   try {
-    const userId = await getUserId();
     await createTodo({ ...result.data, user: { connect: { id: userId } } });
     return { data };
   } catch (e) {
@@ -40,8 +44,10 @@ export async function saveTodo(formData: FormData): Promise<TodoFormState> {
 }
 
 export async function deleteTodo(todoId: number): Promise<DeleteTodoState> {
+  const session = await auth();
+  const userId = session?.user?.id;
+
   try {
-    const userId = await getUserId();
     const todo = await deleteTodoById(todoId, userId);
     return { data: todo };
   } catch (e) {
