@@ -7,12 +7,13 @@ async function main() {
     where: { email: 'user1@example.com' },
     update: {},
     create: {
+      id: 'user1-id',
       email: 'user1@example.com',
       name: 'User One',
       todos: {
         create: [
-          { title: 'Todo 1 for User One' },
-          { title: 'Todo 2 for User One' },
+          { title: 'Todo 1 for User One', userId: 'user1-id' },
+          { title: 'Todo 2 for User One', userId: 'user1-id' },
         ],
       },
     },
@@ -22,12 +23,13 @@ async function main() {
     where: { email: 'user2@example.com' },
     update: {},
     create: {
+      id: 'user2-id',
       email: 'user2@example.com',
       name: 'User Two',
       todos: {
         create: [
-          { title: 'Todo 1 for User Two' },
-          { title: 'Todo 2 for User Two' },
+          { title: 'Todo 1 for User Two', userId: 'user2-id' },
+          { title: 'Todo 2 for User Two', userId: 'user2-id' },
         ],
       },
     },
