@@ -7,6 +7,7 @@ async function main() {
     where: { email: 'user1@example.com' },
     update: {},
     create: {
+      id: 'user1-id',
       email: 'user1@example.com',
       name: 'User One',
       todos: {
@@ -22,6 +23,7 @@ async function main() {
     where: { email: 'user2@example.com' },
     update: {},
     create: {
+      id: 'user2-id',
       email: 'user2@example.com',
       name: 'User Two',
       todos: {
