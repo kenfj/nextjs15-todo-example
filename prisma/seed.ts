@@ -12,8 +12,8 @@ async function main() {
       name: 'User One',
       todos: {
         create: [
-          { title: 'Todo 1 for User One', userId: 'user1-id' },
-          { title: 'Todo 2 for User One', userId: 'user1-id' },
+          { title: 'Todo 1 for User One' },
+          { title: 'Todo 2 for User One' },
         ],
       },
     },
@@ -28,8 +28,8 @@ async function main() {
       name: 'User Two',
       todos: {
         create: [
-          { title: 'Todo 1 for User Two', userId: 'user2-id' },
-          { title: 'Todo 2 for User Two', userId: 'user2-id' },
+          { title: 'Todo 1 for User Two' },
+          { title: 'Todo 2 for User Two' },
         ],
       },
     },
