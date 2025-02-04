@@ -184,3 +184,47 @@ npx ts-node --compiler-options '{"module":"CommonJS"}' prisma/seed.ts
 ### Note
 
 If you encounter an error stating that a folder called `prisma` already exists in your project when running `npx prisma init`, it is expected. The `prisma` folder and its contents have already been set up in this project. You can skip the `npx prisma init` step and proceed with the other steps.
+
+## Resetting the Database in Two Ways
+
+How to reset database when edited `schema.prisma` during development
+
+```bash
+# Push the state from Prisma schema to the database during prototyping
+# (db push does not interact with or rely on migrations)
+npx prisma db push reset
+
+# db push will trigger generators (no need to run npx prisma generate)
+```
+
+* seed script to populate the database with initial data:
+
+```bash
+npx ts-node --compiler-options '{"module":"CommonJS"}' prisma/seed.ts
+# or
+npx prisma db seed
+```
+
+```bash
+# Reset your database and apply all migrations (trigger generators/seed)
+npx prisma migrate reset
+# Are you sure you want to reset your database? All data will be lost. › (y/N)
+
+# migrate reset will trigger generators and seed
+```
+
+## Typical Development Workflow with Prisma
+
+After edit `schema.prisma`...
+
+### prototyping
+
+1. `npx prisma db push reset`
+2. (optional) `npx prisma generate`
+3. `npx prisma db seed`
+
+### development
+
+1. `npx prisma migrate dev --name init`
+2. `npx prisma migrate dev --name add-some-field`
+3. `npx prisma migrate status`
