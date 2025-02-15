@@ -228,3 +228,17 @@ After edit `schema.prisma`...
 1. `npx prisma migrate dev --name init`
 2. `npx prisma migrate dev --name add-some-field`
 3. `npx prisma migrate status`
+
+## Checking and Upgrading NPM Packages
+
+To check for outdated packages, run the following command:
+
+```bash
+npm outdated
+```
+
+To upgrade all outdated packages, run the following command:
+
+```bash
+npm update
+```
