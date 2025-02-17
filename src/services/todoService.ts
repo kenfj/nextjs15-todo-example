@@ -1,5 +1,5 @@
 import { auth } from '@/auth';
-import { DeleteTodoState, TodoFetchResponse, TodoFormState, TodoSchema, TodoSchemaType } from '@/models/todo';
+import { DeleteTodoState, TodoFetchResponse, TodoFormState, TodoSchema } from '@/models/todo';
 import { createTodo, deleteTodoById, findAllByUserId } from '@/repositories/todo_repository';
 import { errorName, logPrismaError } from '@/utils/errorUtils';
 
@@ -17,26 +17,22 @@ export async function findAllTodos(): Promise<TodoFetchResponse> {
 }
 
 export async function saveTodo(formData: FormData): Promise<TodoFormState> {
-  const data: TodoSchemaType = {
-    title: `${formData.get('title')}`,              // empty string if not defined
-    completed: formData.get('completed') === 'on',  // checkbox value is on/off
-  };
+  const formObject = Object.fromEntries(formData.entries());
+  const { data, success, error } = TodoSchema.safeParse(formObject);
 
-  const result = TodoSchema.safeParse(data);
-
-  if (!result.success) {
-    console.warn("server side validation error", result.error.flatten())
-    return { data, errors: result.error.flatten().fieldErrors };
+  if (!success) {
+    console.warn("server side validation error", error.flatten())
+    return { data, errors: error.flatten().fieldErrors };
   }
 
-  console.info(`Saving Todo: ${JSON.stringify(result.data)}`)
+  console.info(`Saving Todo: ${JSON.stringify(data)}`)
 
   const session = await auth();
   const userId = session?.user?.id;
 
   try {
-    await createTodo({ ...result.data, user: { connect: { id: userId } } });
-    return { data };
+    const created = await createTodo({ ...data, user: { connect: { id: userId } } });
+    return { data: created };
   } catch (e) {
     logPrismaError(e, "saveTodo");
     return { data, error: errorName(e) };
