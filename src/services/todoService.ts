@@ -18,7 +18,6 @@ export async function findAllTodos(): Promise<TodoFetchResponse> {
 
 export async function saveTodo(formData: FormData): Promise<TodoFormState> {
   const formObject = Object.fromEntries(formData.entries());
-
   const { data, success, error } = TodoSchema.safeParse(formObject);
 
   if (!success) {
