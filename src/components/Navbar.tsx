@@ -1,8 +1,7 @@
 import Link from 'next/link';
 
 import { auth } from "@/auth";
-import SignIn from '@/components/sign-in';
-import SignOut from '@/components/sign-out';
+import AuthButton from '@/components/AuthButton';
 
 const Navbar = async () => {
   const session = await auth();
@@ -19,11 +18,7 @@ const Navbar = async () => {
           </ul>
         </div>
         <div className={"flex-none"}>
-          {session ? (
-            <SignOut />
-          ) : (
-            <SignIn />
-          )}
+          <AuthButton />
         </div>
       </div>
     </nav>
