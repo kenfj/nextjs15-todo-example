@@ -1,8 +1,7 @@
 import Link from 'next/link';
 
 import { auth } from "@/auth";
-import SignIn from '@/components/sign-in';
-import SignOut from '@/components/sign-out';
+import AuthButton from '@/components/AuthButton';
 
 const Navbar = async () => {
   const session = await auth();
@@ -14,16 +13,16 @@ const Navbar = async () => {
           <Link href="/" className="text-xl font-bold">Todo App</Link>
           <ul className="menu menu-horizontal">
             <li><Link href="/">Home</Link></li>
-            <li><Link href="/todos">Todos List</Link></li>
-            <li><Link href="/todos/create">Create Todo</Link></li>
+            {session && (
+              <>
+                <li><Link href="/todos">Todos List</Link></li>
+                <li><Link href="/todos/create">Create Todo</Link></li>
+              </>
+            )}
           </ul>
         </div>
         <div className={"flex-none"}>
-          {session ? (
-            <SignOut />
-          ) : (
-            <SignIn />
-          )}
+          <AuthButton />
         </div>
       </div>
     </nav>
