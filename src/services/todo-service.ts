@@ -1,6 +1,6 @@
 import { auth } from '@/auth';
 import { DeleteTodoState, TodoFetchResponse, TodoFormState, TodoSchema } from '@/models/todo';
-import { createTodo, deleteTodoById, findAllByUserId } from '@/repositories/todo_repository';
+import { createTodo, deleteTodoById, findAllByUserId } from '@/repositories/todo-repository';
 import { errorName, logPrismaError } from '@/utils/errorUtils';
 
 export async function findAllTodos(): Promise<TodoFetchResponse> {

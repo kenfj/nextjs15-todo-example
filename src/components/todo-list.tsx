@@ -1,6 +1,6 @@
 import { Todo } from '@prisma/client';
 
-import DeleteTodoButton from '@/components/DeleteTodoButton';
+import DeleteTodoButton from '@/components/delete-todo-button';
 
 type TodoListProps = {
   todos?: Todo[];
