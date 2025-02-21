@@ -4,7 +4,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 import { DeleteTodoState, TodoFormState } from '@/models/todo';
-import { deleteTodo, saveTodo } from '@/services/todoService';
+import { deleteTodo, saveTodo } from '@/services/todo-service';
 
 export async function createTodoAction(prevState: TodoFormState, formData: FormData) {
   const result = await saveTodo(formData);

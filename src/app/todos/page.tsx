@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import TodoList from '@/components/TodoList';
+import TodoList from '@/components/todo-list';
 import { findAllTodos } from '@/services/todoService';
 
 const TodosPage = async () => {
