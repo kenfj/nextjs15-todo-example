@@ -1,7 +1,7 @@
 import { auth } from '@/auth';
 import { DeleteTodoState, TodoFetchResponse, TodoFormState, TodoSchema } from '@/models/todo';
 import { createTodo, deleteTodoById, findAllByUserId } from '@/repositories/todo-repository';
-import { errorName, logPrismaError } from '@/utils/errorUtils';
+import { errorName, logPrismaError } from '@/utils/error-utils';
 
 export async function findAllTodos(): Promise<TodoFetchResponse> {
   const session = await auth();
