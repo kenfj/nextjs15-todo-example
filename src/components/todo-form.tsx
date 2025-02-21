@@ -7,7 +7,7 @@ import { useActionState } from 'react';
 import { createTodoAction } from '@/actions/todos';
 import { TodoSchema, TodoSchemaType } from '@/models/todo';
 
-import styles from './TodoForm.module.css';
+import styles from './todo-form.module.css';
 
 // client side zod errors: fields.title.errors
 // server side zod errors: state.errors
