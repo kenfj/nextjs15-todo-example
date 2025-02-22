@@ -1,14 +1,15 @@
 import { signIn } from "@/auth"
+import { LOGIN_HOME } from "@/lib/routes";
 
 export default function SignIn() {
   return (
     <form
       action={async () => {
         "use server"
-        await signIn("github")
+        await signIn(undefined, { redirectTo: LOGIN_HOME })
       }}
     >
-      <button type="submit">Signin with GitHub</button>
+      <button type="submit">Sign In</button>
     </form>
   )
 }
