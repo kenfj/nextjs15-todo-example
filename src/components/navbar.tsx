@@ -10,14 +10,15 @@ const Navbar = async () => {
     <nav className={"navbar bg-base-300"}>
       <div className={"mx-2 flex-1 px-2"}>
         <div className={"flex-1"}>
-          <Link href="/" className="text-xl font-bold">Todo App</Link>
+          <div className="text-xl font-bold">Todo App</div>
           <ul className="menu menu-horizontal">
-            <li><Link href="/">Home</Link></li>
-            {session && (
+            {session ? (
               <>
                 <li><Link href="/todos">Todos List</Link></li>
                 <li><Link href="/todos/create">Create Todo</Link></li>
               </>
+            ) : (
+              <li><Link href="/">Home</Link></li>
             )}
           </ul>
         </div>
