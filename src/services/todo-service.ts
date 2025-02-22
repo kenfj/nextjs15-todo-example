@@ -1,4 +1,4 @@
-import { auth } from '@/auth';
+import { auth } from '@/lib/auth/auth';
 import { DeleteTodoState, TodoFetchResponse, TodoFormState, TodoSchema } from '@/models/todo';
 import { createTodo, deleteTodoById, findAllByUserId } from '@/repositories/todo-repository';
 import { errorName, logPrismaError } from '@/utils/error-utils';

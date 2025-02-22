@@ -1,4 +1,4 @@
-import { signOut } from "@/auth"
+import { signOut } from "@/lib/auth/auth"
 import { PUBLIC_HOME } from "@/lib/routes";
 
 export default function SignOut() {
