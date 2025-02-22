@@ -1,12 +1,14 @@
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import NextAuth from "next-auth"
 
-import authConfig from "@/auth.config"
+import authConfig from "@/lib/auth/auth.config"
 import { prisma } from "@/lib/prisma"
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
   // https://authjs.dev/guides/edge-compatibility
+  // https://authjs.dev/getting-started/migrating-to-v5#edge-compatibility
+
   session: { strategy: "jwt" },
   ...authConfig,
   // https://authjs.dev/guides/extending-the-session
