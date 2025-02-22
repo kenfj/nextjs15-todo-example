@@ -1,4 +1,4 @@
-import { signIn } from "@/auth"
+import { signIn } from "@/lib/auth/auth"
 import { LOGIN_HOME } from "@/lib/routes";
 
 export default function SignIn() {
