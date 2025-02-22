@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import { auth } from "@/auth";
-import AuthButton from '@/components/AuthButton';
+import AuthButton from '@/components/auth-button';
 
 const Navbar = async () => {
   const session = await auth();
