@@ -8,7 +8,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
   // https://authjs.dev/guides/edge-compatibility
   // https://authjs.dev/getting-started/migrating-to-v5#edge-compatibility
-
   session: { strategy: "jwt" },
   ...authConfig,
   // https://authjs.dev/guides/extending-the-session
