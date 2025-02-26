@@ -1,14 +1,8 @@
-import { signOut } from "@/lib/auth/auth"
-import { PUBLIC_HOME } from "@/lib/routes";
+import { signOutAction } from "@/actions/auth";
 
 export default function SignOut() {
   return (
-    <form
-      action={async () => {
-        "use server"
-        await signOut({ redirectTo: PUBLIC_HOME })
-      }}
-    >
+    <form action={signOutAction}>
       <button type="submit">Sign Out</button>
     </form>
   )
