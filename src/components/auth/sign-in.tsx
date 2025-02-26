@@ -1,14 +1,8 @@
-import { signIn } from "@/lib/auth/auth"
-import { LOGIN_HOME } from "@/lib/routes";
+import { signInAction } from "@/actions/auth";
 
 export default function SignIn() {
   return (
-    <form
-      action={async () => {
-        "use server"
-        await signIn(undefined, { redirectTo: LOGIN_HOME })
-      }}
-    >
+    <form action={signInAction}>
       <button type="submit">Sign In</button>
     </form>
   )
