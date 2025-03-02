@@ -1,6 +1,6 @@
 import { Prisma, Todo } from '@prisma/client';
 
-import { prisma } from '@/lib/prisma';
+import prisma from '@/lib/prisma';
 
 // PrismaはfindManyやfindFirstはWhere句のクエリがundefinedの場合条件なしで検索する仕様なので注意
 // https://qiita.com/bon10/items/cb59c00fdd66ae880878
