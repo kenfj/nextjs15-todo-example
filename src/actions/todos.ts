@@ -16,8 +16,8 @@ export async function createTodoAction(prevState: TodoFormState, formData: FormD
   redirect('/');
 }
 
-export async function deleteTodoAction(todoId: number): Promise<DeleteTodoState> {
-  const result = await deleteTodo(todoId);
+export async function deleteTodoAction(id: number): Promise<DeleteTodoState> {
+  const result = await deleteTodo(id);
 
   if (!result.error) {
     revalidatePath('/');
