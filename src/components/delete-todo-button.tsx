@@ -7,15 +7,15 @@ import { deleteTodoAction } from '@/actions/todos';
 import { DeleteTodoState } from '@/models/todo';
 
 type DeleteTodoButtonProps = {
-  todoId: number;
+  id: number;
 }
 
-const DeleteTodoButton = ({ todoId }: DeleteTodoButtonProps) => {
+const DeleteTodoButton = ({ id }: DeleteTodoButtonProps) => {
   const [state, setState] = useState<DeleteTodoState>();
   const { pending } = useFormStatus();
 
   const handleDelete = async () => {
-    const result = await deleteTodoAction(todoId);
+    const result = await deleteTodoAction(id);
     setState(result);
   };
 

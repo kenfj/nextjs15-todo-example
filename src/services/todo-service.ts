@@ -39,12 +39,12 @@ export async function saveTodo(formData: FormData): Promise<TodoFormState> {
   }
 }
 
-export async function deleteTodo(todoId: number): Promise<DeleteTodoState> {
+export async function deleteTodo(id: number): Promise<DeleteTodoState> {
   const session = await auth();
   const userId = session?.user?.id;
 
   try {
-    const todo = await deleteTodoById(todoId, userId);
+    const todo = await deleteTodoById(id, userId);
     return { data: todo };
   } catch (e) {
     logPrismaError(e, "deleteTodo");
