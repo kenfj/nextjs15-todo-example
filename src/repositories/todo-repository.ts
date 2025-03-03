@@ -15,9 +15,7 @@ export async function findAllByUserId(userId?: string, orderBy: keyof Todo = 'cr
 
   return await prisma.todo.findMany({
     where: { userId },
-    orderBy: { 
-      [orderBy]: 'asc' 
-    }
+    orderBy: { [orderBy]: 'asc' },
   });
 }
 
@@ -26,6 +24,6 @@ export async function deleteTodoById(id: number, userId?: string): Promise<Todo>
     throw new RangeError("User ID is undefined");
 
   return await prisma.todo.delete({
-    where: { id, userId }
+    where: { id, userId },
   });
 }
