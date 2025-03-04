@@ -261,3 +261,28 @@ npm install -D vitest @vitejs/plugin-react jsdom @testing-library/react @testing
 ```bash
 npx vitest run tests/sample.test.ts
 ```
+
+## Setup Vitest for Prisma
+
+* jest
+    - https://www.prisma.io/docs/orm/prisma-client/testing/unit-testing
+* vitest
+    - https://www.prisma.io/blog/testing-series-1-8eRB5p0Y8o
+    - https://www.prisma.io/blog/testing-series-2-xPhjjmIEsM#set-up-vitest
+
+1. Install the required package:
+
+```bash
+npm i -D vitest-mock-extended
+```
+
+2. Create `src/lib/__mocks__/prisma.ts`
+3. Create `tests/fixtures/test-data.ts`
+4. Create `tests/repositories/todo-repository.test.ts`
+5. Run the following command to execute your tests:
+
+```bash
+npm run test
+# or
+npm t
+```
