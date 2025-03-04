@@ -242,3 +242,22 @@ To upgrade all outdated packages, run the following command:
 ```bash
 npm update
 ```
+
+## Setup Vitest
+
+* https://nextjs.org/docs/app/building-your-application/testing/vitest#manual-setup
+
+1. Install the required packages:
+
+```bash
+npm install -D vitest @vitejs/plugin-react jsdom @testing-library/react @testing-library/dom vite-tsconfig-paths
+```
+
+2. Create a `vitest.config.mts` file in the root of your project
+3. Add a test script to your `package.json`
+4. Add `tests/sample.test.ts`
+5. Run the following command to execute your tests:
+
+```bash
+npx vitest run tests/sample.test.ts
+```
