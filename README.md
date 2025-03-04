@@ -264,6 +264,12 @@ npx vitest run tests/sample.test.ts
 
 ## Setup Vitest for Prisma
 
+* jest
+    - https://www.prisma.io/docs/orm/prisma-client/testing/unit-testing
+* vitest
+    - https://www.prisma.io/blog/testing-series-1-8eRB5p0Y8o
+    - https://www.prisma.io/blog/testing-series-2-xPhjjmIEsM#set-up-vitest
+
 1. Install the required package:
 
 ```bash
@@ -277,4 +283,6 @@ npm i -D vitest-mock-extended
 
 ```bash
 npm run test
+# or
+npm t
 ```
