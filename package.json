@@ -6,6 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
+    "test": "vitest",
     "lint": "next lint",
     "prisma:db-reset": "prisma db push reset",
     "prisma:migrate-reset": "prisma migrate reset --force"
