@@ -2,7 +2,7 @@ import { Prisma } from '@prisma/client';
 import { expect, test } from 'vitest';
 
 import prismaMock from '@/lib/__mocks__/prisma';
-import { createTodo, getById, findAllByUserId } from '@/repositories/todo-repository';
+import { createTodo, findAllByUserId, getById } from '@/repositories/todo-repository';
 
 import { mock_not_found_error, todo1, todo2 } from '../fixtures/test-data';
 
@@ -26,15 +26,17 @@ test('getById should return the todo with the given id', async () => {
   const todo = await getById(todo1.id, "fake-user-id")
 
   expect(todo).toStrictEqual(todo1)
-  expect(prismaMock.todo.findUniqueOrThrow).toHaveBeenCalledWith({
-    where: { id: todo1.id, userId: "fake-user-id" }
-  })
+  expect(prismaMock.todo.findUniqueOrThrow)
+    .toHaveBeenCalledWith({
+      where: { id: todo1.id, userId: "fake-user-id" }
+    })
 })
 
 test('getById should throw mock_not_found_error when todo is not found', async () => {
   prismaMock.todo.findUniqueOrThrow.mockRejectedValue(mock_not_found_error)
 
-  await expect(getById(999, "fake-user-id")).rejects.toThrow(Prisma.PrismaClientKnownRequestError)
+  await expect(getById(999, "fake-user-id"))
+    .rejects.toThrow(Prisma.PrismaClientKnownRequestError)
 })
 
 test('findAllByUserId should return all todos for the given user id', async () => {
