@@ -6,5 +6,15 @@ export default defineConfig({
   plugins: [tsconfigPaths(), react()],
   test: {
     environment: 'jsdom',
+    coverage: {
+      enabled: true,
+      include: [
+        "src",
+      ],
+      extension: [
+        ".ts",
+        ".tsx",
+      ],
+    },
   },
 })
