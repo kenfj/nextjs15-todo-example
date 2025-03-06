@@ -9,6 +9,15 @@ export async function createTodo(input: Prisma.TodoCreateInput): Promise<Todo> {
   return await prisma.todo.create({ data: { ...input } });
 }
 
+export async function getById(id: number, userId?: string) {
+  if (userId === undefined)
+    throw new RangeError("User ID is undefined");
+
+  return await prisma.todo.findUniqueOrThrow({
+    where: { id, userId },
+  });
+}
+
 export async function findAllByUserId(userId?: string, orderBy: keyof Todo = 'createdAt'): Promise<Todo[]> {
   if (userId === undefined)
     throw new RangeError("User ID is undefined");
