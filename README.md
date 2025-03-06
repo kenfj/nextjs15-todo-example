@@ -286,3 +286,19 @@ npm run test
 # or
 npm t
 ```
+
+## Setup Vitest Coverage and UI
+
+```bash
+# https://vitest.dev/guide/coverage
+npm i -D @vitest/coverage-v8
+
+# update vitest.config.mts
+
+npm run vitest:coverage
+
+# https://vitest.dev/guide/ui
+npm i -D @vitest/ui
+
+npm run vitest:ui
+```
