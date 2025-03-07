@@ -2,7 +2,7 @@ import { Prisma } from '@prisma/client';
 import { expect, test } from 'vitest';
 
 import prismaMock from '@/lib/__mocks__/prisma';
-import { createTodo, findAllByUserId, getById } from '@/repositories/todo-repository';
+import { createTodo, deleteTodoById, findAllByUserId, getById } from '@/repositories/todo-repository';
 
 import { mock_not_found_error, todo1, todo2 } from '../fixtures/test-data';
 
@@ -52,4 +52,23 @@ test('findAllByUserId should return all todos for the given user id', async () =
   const todos2 = await findAllByUserId("fake-user-id")
 
   expect(todos2).toStrictEqual([todo1, todo2])
+})
+
+test('deleteTodoById should delete the todo with the given id and user id', async () => {
+  prismaMock.todo.delete.mockResolvedValue(todo1)
+
+  const deletedTodo = await deleteTodoById(todo1.id, "fake-user-id")
+
+  expect(deletedTodo).toStrictEqual(todo1)
+  expect(prismaMock.todo.delete)
+    .toHaveBeenCalledWith({
+      where: { id: todo1.id, userId: "fake-user-id" }
+    })
+})
+
+test('deleteTodoById should throw mock_not_found_error when todo is not found', async () => {
+  prismaMock.todo.delete.mockRejectedValue(mock_not_found_error)
+
+  await expect(deleteTodoById(999, "fake-user-id"))
+    .rejects.toThrow(Prisma.PrismaClientKnownRequestError)
 })
