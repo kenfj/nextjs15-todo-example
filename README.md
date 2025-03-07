@@ -1,6 +1,16 @@
 # nextjs15-todo-example
 GitHub Copilot Workspace generated sample todo app of next.js 15 with server actions
 
+## Quick Start
+
+```bash
+npm install
+
+npm run dev
+npm run vitest:ui
+npm run prisma:studio
+```
+
 ## Installation
 
 To install the dependencies, run the following command:
@@ -181,6 +191,18 @@ npx prisma migrate dev --name init
 npx ts-node --compiler-options '{"module":"CommonJS"}' prisma/seed.ts
 ```
 
+9. Starting Prisma Studio
+
+> The ultimate tool for exploring and editing data in your Prisma project.
+
+```bash
+npx prisma studio
+# or
+npm run prisma:studio
+
+# http://localhost:5555/
+```
+
 ### Note
 
 If you encounter an error stating that a folder called `prisma` already exists in your project when running `npx prisma init`, it is expected. The `prisma` folder and its contents have already been set up in this project. You can skip the `npx prisma init` step and proceed with the other steps.
@@ -218,6 +240,8 @@ npx prisma migrate reset
 After edit `schema.prisma`...
 
 ### prototyping
+
+`npx prisma migrate reset` (one shot command) or
 
 1. `npx prisma db push reset`
 2. (optional) `npx prisma generate`

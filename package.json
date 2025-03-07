@@ -10,6 +10,7 @@
     "vitest:coverage": "vitest run --coverage",
     "vitest:ui": "vitest --ui",
     "lint": "next lint",
+    "prisma:studio": "prisma studio",
     "prisma:db-reset": "prisma db push reset",
     "prisma:migrate-reset": "prisma migrate reset --force"
   },
