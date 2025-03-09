@@ -30,6 +30,17 @@ export const todo2: Todo = {
   updatedAt: mockDate,
 }
 
+// https://www.prisma.io/docs/orm/reference/error-reference#p1001
+const messageP1001 = (
+  "Can't reach database server at {database_host}:{database_port}"
+  + " Please make sure your database server is running"
+  + " at {database_host}:{database_port}."
+);
+
+export const mock_cannot_reach_database_error = new Prisma.PrismaClientKnownRequestError(
+  messageP1001, { code: "P1001", clientVersion: "mock-client-version" }
+);
+
 // https://www.prisma.io/docs/orm/reference/error-reference#p2025
 const cause = "Expected a record, found none.";
 const messageP2025 = ("An operation failed because it depends on "
