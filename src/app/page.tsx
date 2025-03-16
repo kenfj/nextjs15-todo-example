@@ -8,7 +8,6 @@ export default async function Home() {
 
   if (userId) {
     redirect('/todos');
-    return;
   }
 
   return (
