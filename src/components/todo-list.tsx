@@ -26,7 +26,7 @@ const TodoList = ({ todos }: TodoListProps) => {
           </div>
           <div className="flex items-center">
             <span className="ml-2 text-xs text-gray-500">{new Date(todo.createdAt).toISOString().replace('T', ' ').substring(0,19)}</span>
-            <DeleteTodoButton todoId={todo.id} />
+            <DeleteTodoButton id={todo.id} />
           </div>
         </li>
       ))}
