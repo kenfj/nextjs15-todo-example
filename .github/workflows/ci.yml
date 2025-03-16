@@ -23,8 +23,8 @@ jobs:
           path: |
             node_modules
           key: ${{ runner.arch }}-${{ runner.os }}-${{ steps.setup_node.outputs.node-version }}-node_modules-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.arch }}-${{ runner.os }}-${{ steps.setup_node.outputs.node-version }}-node_modules-
+          restore-keys: |
+            ${{ runner.arch }}-${{ runner.os }}-${{ steps.setup_node.outputs.node-version }}-node_modules-
       - name: List the state of node modules
         continue-on-error: true
         run: npm list
