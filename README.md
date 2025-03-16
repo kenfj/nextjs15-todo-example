@@ -326,3 +326,16 @@ npm i -D @vitest/ui
 
 npm run vitest:ui
 ```
+
+## Check Errors in CI
+
+```bash
+# check compile errors
+npm run tsc
+
+# check lint errors
+npm run lint
+
+# run unit test
+npm test
+```
