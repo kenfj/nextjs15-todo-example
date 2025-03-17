@@ -327,6 +327,11 @@ npm i -D @vitest/ui
 npm run vitest:ui
 ```
 
+## React Testing Library
+
+* Common mistakes with React Testing Library
+    - https://qiita.com/kobanyan/items/126512ec3e8d76c538b3
+
 ## Check Errors in CI
 
 ```bash

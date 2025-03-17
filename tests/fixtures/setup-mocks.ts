@@ -16,3 +16,5 @@ const mockSession: Session = {
 vi.mock('@/lib/auth/auth', () => ({
   auth: vi.fn(() => mockSession),
 }));
+
+export { mockSession };
