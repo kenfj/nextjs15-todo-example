@@ -1,6 +1,6 @@
-import Link from 'next/link';
+import Link from "next/link";
 
-import TodoForm from '@/components/todo-form';
+import TodoForm from "@/components/todo-form";
 
 const CreateTodoPage = () => {
   return (

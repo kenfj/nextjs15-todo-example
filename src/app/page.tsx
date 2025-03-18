@@ -1,13 +1,13 @@
-import { redirect } from 'next/navigation';
+import { redirect } from "next/navigation";
 
-import { auth } from '@/lib/auth/auth';
+import { auth } from "@/lib/auth/auth";
 
 export default async function Home() {
   const session = await auth();
   const userId = session?.user?.id;
 
   if (userId) {
-    redirect('/todos');
+    redirect("/todos");
   }
 
   return (

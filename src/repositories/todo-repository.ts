@@ -1,6 +1,6 @@
-import { Prisma, Todo } from '@prisma/client';
+import { Prisma, Todo } from "@prisma/client";
 
-import prisma from '@/lib/prisma';
+import prisma from "@/lib/prisma";
 
 // PrismaはfindManyやfindFirstはWhere句のクエリがundefinedの場合条件なしで検索する仕様なので注意
 // https://qiita.com/bon10/items/cb59c00fdd66ae880878
@@ -18,13 +18,13 @@ export async function getById(id: number, userId?: string) {
   });
 }
 
-export async function findAllByUserId(userId?: string, orderBy: keyof Todo = 'createdAt'): Promise<Todo[]> {
+export async function findAllByUserId(userId?: string, orderBy: keyof Todo = "createdAt"): Promise<Todo[]> {
   if (userId === undefined)
     throw new RangeError("User ID is undefined");
 
   return await prisma.todo.findMany({
     where: { userId },
-    orderBy: { [orderBy]: 'asc' },
+    orderBy: { [orderBy]: "asc" },
   });
 }
 

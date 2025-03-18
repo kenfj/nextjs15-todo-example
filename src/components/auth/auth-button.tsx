@@ -6,9 +6,9 @@ const AuthButton = async () => {
   const session = await auth();
 
   return (
-    session ?
-      <SignOut /> :
-      <SignIn />
+    session
+      ? <SignOut />
+      : <SignIn />
   );
 };
 

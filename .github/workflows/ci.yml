@@ -23,8 +23,11 @@ jobs:
       - name: Run TypeScript compiler
         run: npm run tsc
 
-      - name: Run ESLint
+      - name: Run ESLint on src with next lint
         run: npm run lint
+
+      - name: Run ESLint on all files
+        run: npx eslint
 
       - name: Run Vitest
         run: npm test
