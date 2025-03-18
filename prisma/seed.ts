@@ -1,35 +1,35 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 async function main() {
   const user1 = await prisma.user.upsert({
-    where: { email: 'user1@example.com' },
+    where: { email: "user1@example.com" },
     update: {},
     create: {
-      id: 'user1-id',
-      email: 'user1@example.com',
-      name: 'User One',
+      id: "user1-id",
+      email: "user1@example.com",
+      name: "User One",
       todos: {
         create: [
-          { title: 'Todo 1 for User One' },
-          { title: 'Todo 2 for User One' },
+          { title: "Todo 1 for User One" },
+          { title: "Todo 2 for User One" },
         ],
       },
     },
   });
 
   const user2 = await prisma.user.upsert({
-    where: { email: 'user2@example.com' },
+    where: { email: "user2@example.com" },
     update: {},
     create: {
-      id: 'user2-id',
-      email: 'user2@example.com',
-      name: 'User Two',
+      id: "user2-id",
+      email: "user2@example.com",
+      name: "User Two",
       todos: {
         create: [
-          { title: 'Todo 1 for User Two' },
-          { title: 'Todo 2 for User Two' },
+          { title: "Todo 1 for User Two" },
+          { title: "Todo 2 for User Two" },
         ],
       },
     },

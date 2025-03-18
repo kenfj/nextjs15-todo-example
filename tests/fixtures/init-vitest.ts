@@ -1,5 +1,5 @@
-import { cleanup } from '@testing-library/react';
-import { afterEach, vi } from 'vitest';
+import { cleanup } from "@testing-library/react";
+import { afterEach, vi } from "vitest";
 
 afterEach(() => {
   // init screen: https://stackoverflow.com/questions/76485245
