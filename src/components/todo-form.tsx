@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { useForm } from '@conform-to/react';
-import { parseWithZod } from '@conform-to/zod';
-import { useActionState } from 'react';
+import { useForm } from "@conform-to/react";
+import { parseWithZod } from "@conform-to/zod";
+import { useActionState } from "react";
 
-import { createTodoAction } from '@/actions/todos';
-import { TodoSchema, TodoSchemaType } from '@/models/todo';
+import { createTodoAction } from "@/actions/todos";
+import { TodoSchema, TodoSchemaType } from "@/models/todo";
 
-import styles from './todo-form.module.css';
+import styles from "./todo-form.module.css";
 
 // client side zod errors: fields.title.errors
 // server side zod errors: state.errors
@@ -20,8 +20,8 @@ const TodoForm = () => {
     onValidate({ formData }) {
       return parseWithZod(formData, { schema: TodoSchema });
     },
-    shouldValidate: 'onBlur',
-    shouldRevalidate: 'onInput',
+    shouldValidate: "onBlur",
+    shouldRevalidate: "onInput",
   });
 
   return (

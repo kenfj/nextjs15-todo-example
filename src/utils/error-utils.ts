@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client';
+import { Prisma } from "@prisma/client";
 
 export function errorName(e: unknown): string {
   return (e instanceof Error) ? e.name : `${e}`;

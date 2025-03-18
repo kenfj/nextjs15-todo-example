@@ -1,7 +1,7 @@
-'use server';
+"use server";
 
-import { auth, signIn, signOut } from '@/lib/auth/auth';
-import { LOGIN_HOME, PUBLIC_HOME } from '@/lib/routes';
+import { auth, signIn, signOut } from "@/lib/auth/auth";
+import { LOGIN_HOME, PUBLIC_HOME } from "@/lib/routes";
 
 export async function signInAction() {
   await signIn(undefined, { redirectTo: LOGIN_HOME });

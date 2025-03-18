@@ -5,5 +5,5 @@ export default function SignOut() {
     <form action={signOutAction}>
       <button type="submit">Sign Out</button>
     </form>
-  )
+  );
 }

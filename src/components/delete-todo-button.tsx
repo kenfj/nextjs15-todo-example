@@ -1,14 +1,14 @@
-'use client'
+"use client";
 
-import { useState } from 'react';
-import { useFormStatus } from 'react-dom';
+import { useState } from "react";
+import { useFormStatus } from "react-dom";
 
-import { deleteTodoAction } from '@/actions/todos';
-import { DeleteTodoState } from '@/models/todo';
+import { deleteTodoAction } from "@/actions/todos";
+import { DeleteTodoState } from "@/models/todo";
 
 type DeleteTodoButtonProps = {
   id: number;
-}
+};
 
 const DeleteTodoButton = ({ id }: DeleteTodoButtonProps) => {
   const [state, setState] = useState<DeleteTodoState>();
@@ -26,7 +26,7 @@ const DeleteTodoButton = ({ id }: DeleteTodoButtonProps) => {
       </button>
       {state?.error && <p className="text-red-500">{state.error}</p>}
     </>
-  )
+  );
 };
 
 export default DeleteTodoButton;
