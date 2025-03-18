@@ -1,4 +1,5 @@
 import { FlatCompat } from "@eslint/eslintrc";
+import stylistic from "@stylistic/eslint-plugin";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
@@ -20,6 +21,17 @@ const eslintConfig = [
       "simple-import-sort/imports": "error",
       "simple-import-sort/exports": "error",
     },
+  },
+  // https://eslint.style/guide/config-presets
+  stylistic.configs.customize({
+    indent: 2,
+    quotes: "double",
+    semi: true,
+    jsx: true,
+    braceStyle: "1tbs",
+  }),
+  {
+    ignores: [".next/*"],
   },
 ];
 

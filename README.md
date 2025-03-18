@@ -344,3 +344,18 @@ npm run lint
 # run unit test
 npm test
 ```
+
+## ESLint Stylistic
+
+* https://eslint.style/guide/migration
+* https://eslint.style/guide/config-presets
+
+```bash
+npm i -D @stylistic/eslint-plugin
+
+# add stylistic.configs.customize in eslint.config.mjs
+
+# Note: next lint will not check tests directory
+npx eslint
+npx eslint --fix
+```
