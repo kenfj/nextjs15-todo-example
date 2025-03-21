@@ -359,3 +359,52 @@ npm i -D @stylistic/eslint-plugin
 npx eslint
 npx eslint --fix
 ```
+
+## Setup Playwright
+
+* https://nextjs.org/docs/app/building-your-application/testing/playwright
+* https://playwright.dev/docs/intro#installation
+
+```bash
+npm init playwright
+✔ Where to put your end-to-end tests? · e2e
+✔ Add a GitHub Actions workflow? (y/N) · true
+✔ Install Playwright browsers (can be done manually via 'npx playwright install')? (Y/n) · true
+
+npx playwright --version
+# Version 1.51.1
+
+npx playwright test
+
+npx playwright show-report
+# http://localhost:9323/
+```
+
+* sample commands:
+
+```bash
+npx playwright test
+# Runs the end-to-end tests.
+
+npx playwright test --ui
+# Starts the interactive UI mode.
+
+npx playwright test --project=chromium
+# Runs the tests only on Desktop Chrome.
+
+npx playwright test example
+# Runs the tests in a specific file.
+
+npx playwright test --debug
+# Runs the tests in debug mode.
+
+npx playwright codegen
+# Auto generate tests with Codegen.
+```
+
+* Updating Playwright
+    - https://playwright.dev/docs/intro#updating-playwright
+
+```bash
+npm install -D @playwright/test@latest
+```

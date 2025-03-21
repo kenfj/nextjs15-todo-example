@@ -14,6 +14,11 @@ export default defineConfig({
       "tests/fixtures/init-vitest.ts",
       "tests/fixtures/setup-mocks.ts",
     ],
+    exclude: [
+      "./node_modules/**",
+      "./e2e/**",
+      "./tests-examples/**",
+    ],
     // https://vitest.dev/guide/coverage
     coverage: {
       include: [
