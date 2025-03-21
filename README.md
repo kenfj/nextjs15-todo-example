@@ -359,3 +359,23 @@ npm i -D @stylistic/eslint-plugin
 npx eslint
 npx eslint --fix
 ```
+
+## Setup Playwright
+
+* https://nextjs.org/docs/app/building-your-application/testing/playwright
+* https://playwright.dev/docs/intro#installation
+
+```bash
+npm init playwright
+✔ Where to put your end-to-end tests? · e2e
+✔ Add a GitHub Actions workflow? (y/N) · true
+✔ Install Playwright browsers (can be done manually via 'npx playwright install')? (Y/n) · true
+
+npx playwright --version
+# Version 1.51.1
+
+npx playwright test
+
+npx playwright show-report
+# http://localhost:9323/
+```
