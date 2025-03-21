@@ -31,7 +31,10 @@ const eslintConfig = [
     braceStyle: "1tbs",
   }),
   {
-    ignores: [".next/*"],
+    ignores: [
+      ".next/*",
+      "playwright-report",
+    ],
   },
 ];
 
