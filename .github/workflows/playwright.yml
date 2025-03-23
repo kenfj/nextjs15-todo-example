@@ -14,6 +14,7 @@ jobs:
       with:
         node-version: lts/*
     - name: Cache Playwright Browsers
+      id: playwright-cache
       uses: actions/cache@v4
       with:
         path: ~/.cache/ms-playwright
@@ -24,6 +25,7 @@ jobs:
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
+      if: steps.playwright-cache.outputs.cache-hit != 'true'
     - name: Run Auth Secret
       run: npx auth secret
     - name: Run Playwright tests
