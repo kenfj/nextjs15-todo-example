@@ -39,7 +39,9 @@ jobs:
       id: packages
       run: echo "PACKAGES=$(npx playwright install-deps chromium --dry-run | grep -oP '(?<=install -y --no-install-recommends ).*[^"]')" >> $GITHUB_OUTPUT
     - name: Create apt archives partial directory
-      run: mkdir -p ~/apt-archives/partial
+      run: |
+        mkdir -p ${{ github.workspace }}/apt-archives/partial
+        echo ${{ github.workspace }}/apt-archives
     - name: Download apt packages
       run: |
         sudo apt-get update -o Dir::Cache::Archives=${{ github.workspace }}/apt-archives
@@ -48,10 +50,10 @@ jobs:
       uses: actions/cache/save@v4
       if: steps.cache-apt.outputs.cache-hit != 'true'
       with:
-        path: ~/apt-archives
+        path: ${{ github.workspace }}/apt-archives
         key: ${{ runner.os }}-apt-${{ hashFiles('**/package-lock.json') }}
     - name: Install apt packages from cache
-      run: sudo apt-get install -o Dir::Cache::Archives=~/apt-archives ${{ steps.packages.outputs.PACKAGES }}
+      run: sudo apt-get install -o Dir::Cache::Archives=${{ github.workspace }}/apt-archives ${{ steps.packages.outputs.PACKAGES }}
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps chromium
     - name: Run Auth Secret
