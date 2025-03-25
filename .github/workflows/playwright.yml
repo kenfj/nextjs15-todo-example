@@ -43,7 +43,8 @@ jobs:
       run: mkdir -p ~/apt-archives/partial
     - name: Download apt packages
       run: |
-        sudo apt-get update && apt-get install --download-only -o Dir::Cache::Archives=/home/runner/apt-archives ${{ steps.packages.outputs.PACKAGES }}
+        sudo apt-get update -o Dir::Cache::Archives=/home/runner/apt-archives
+        sudo apt-get install --download-only -o Dir::Cache::Archives=/home/runner/apt-archives ${{ steps.packages.outputs.PACKAGES }}
     - name: Install apt packages from cache
       run: |
         sudo chown -Rv _apt /home/runner/apt-archives
