@@ -42,8 +42,8 @@ jobs:
       run: mkdir -p ~/apt-archives/partial
     - name: Download apt packages
       run: |
-        sudo apt-get update -o Dir::Cache::Archives=~/apt-archives
-        sudo apt-get install --download-only -o Dir::Cache::Archives=~/apt-archives ${{ steps.packages.outputs.PACKAGES }}
+        sudo apt-get update -o Dir::Cache::Archives=${{ github.workspace }}/apt-archives
+        sudo apt-get install --download-only -o Dir::Cache::Archives=${{ github.workspace }}/apt-archives ${{ steps.packages.outputs.PACKAGES }}
     - name: Save apt archives cache
       uses: actions/cache/save@v4
       if: steps.cache-apt.outputs.cache-hit != 'true'
