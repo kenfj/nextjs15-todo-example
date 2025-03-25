@@ -38,26 +38,25 @@ jobs:
     - name: Set package variable from dry run
       id: packages
       run: echo "PACKAGES=$(npx playwright install-deps chromium --dry-run | grep -oP '(?<=install -y --no-install-recommends ).*[^"]')" >> $GITHUB_OUTPUT
+
     - name: Create apt archives partial directory
       run: |
-        mkdir -p ${{ github.workspace }}/apt-archives/partial
-        ls -l ${{ github.workspace }}/apt-archives
-        sudo chown _apt ${{ github.workspace }}/apt-archives
-        cd ~
-        pwd
+        mkdir -p ~/apt-archives/partial
+        sudo chown _apt /home/runner/apt-archives
     - name: Download apt packages
       run: |
-        sudo apt-get update -o Dir::Cache::Archives=${{ github.workspace }}/apt-archives
-        sudo apt-get install --download-only -o Dir::Cache::Archives=${{ github.workspace }}/apt-archives ${{ steps.packages.outputs.PACKAGES }}
-        sudo chown -Rv _apt:root ${{ github.workspace }}/apt-archives
+        sudo apt-get update -o Dir::Cache::Archives=/home/runner/apt-archives
+        sudo apt-get install --download-only -o Dir::Cache::Archives=/home/runner/apt-archives ${{ steps.packages.outputs.PACKAGES }}
+        sudo chown -Rv _apt:root /home/runner/apt-archives
     - name: Save apt archives cache
       uses: actions/cache/save@v4
       if: steps.cache-apt.outputs.cache-hit != 'true'
       with:
-        path: ${{ github.workspace }}/apt-archives
+        path: ~/apt-archives
         key: ${{ runner.os }}-apt-${{ hashFiles('package-lock.json', '*/package-lock.json') }}
+
     - name: Install apt packages from cache
-      run: sudo apt-get install -o Dir::Cache::Archives=${{ github.workspace }}/apt-archives ${{ steps.packages.outputs.PACKAGES }}
+      run: sudo apt-get install -o Dir::Cache::Archives=/home/runner/apt-archives ${{ steps.packages.outputs.PACKAGES }}
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps chromium
     - name: Run Auth Secret
