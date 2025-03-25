@@ -56,7 +56,9 @@ jobs:
         sudo chown -Rv runner /home/runner/apt-archives
     - name: Save apt archives cache
       uses: actions/cache/save@v4
-      if: steps.cache-apt.outputs.cache-hit != 'true'
+      if: |
+        github.ref_name == 'main' &&
+        steps.cache-apt.outputs.cache-hit != 'true'
       with:
         path: ~/apt-archives
         key: ${{ runner.os }}-apt-${{ hashFiles('package-lock.json', '*/package-lock.json') }}
