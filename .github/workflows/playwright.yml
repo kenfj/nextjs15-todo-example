@@ -27,7 +27,7 @@ jobs:
       uses: actions/cache/restore@v4
       with:
         path: ~/apt-archives
-        key: ${{ runner.os }}-apt-${{ hashFiles('package-lock.json', '*/package-lock.json') }}
+        key: ${{ runner.os }}-apt-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-apt-
 
@@ -54,14 +54,14 @@ jobs:
         sudo chown -Rv _apt /home/runner/apt-archives
         sudo apt-get install -o Dir::Cache::Archives=/home/runner/apt-archives ${{ steps.packages.outputs.PACKAGES }}
         sudo chown -Rv runner /home/runner/apt-archives
-    - name: Save apt archives cache
+    - name: Save cache apt archives in main branch
       uses: actions/cache/save@v4
       if: |
         github.ref_name == 'main' &&
         steps.cache-apt.outputs.cache-hit != 'true'
       with:
         path: ~/apt-archives
-        key: ${{ runner.os }}-apt-${{ hashFiles('package-lock.json', '*/package-lock.json') }}
+        key: ${{ runner.os }}-apt-${{ hashFiles('**/package-lock.json') }}
 
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps --no-shell chromium
