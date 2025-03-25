@@ -41,7 +41,8 @@ jobs:
     - name: Create apt archives partial directory
       run: |
         mkdir -p ${{ github.workspace }}/apt-archives/partial
-        echo ${{ github.workspace }}/apt-archives
+        sudo chown _apt ${{ github.workspace }}/apt-archives
+        ls -l ${{ github.workspace }}/apt-archives
     - name: Download apt packages
       run: |
         sudo apt-get update -o Dir::Cache::Archives=${{ github.workspace }}/apt-archives
