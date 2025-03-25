@@ -47,6 +47,7 @@ jobs:
       run: |
         sudo apt-get update -o Dir::Cache::Archives=${{ github.workspace }}/apt-archives
         sudo apt-get install --download-only -o Dir::Cache::Archives=${{ github.workspace }}/apt-archives ${{ steps.packages.outputs.PACKAGES }}
+        sudo chown -Rv _apt:root ${{ github.workspace }}/apt-archives
     - name: Save apt archives cache
       uses: actions/cache/save@v4
       if: steps.cache-apt.outputs.cache-hit != 'true'
