@@ -47,7 +47,11 @@ jobs:
       run: |
         sudo apt-get update -o Dir::Cache::Archives=/home/runner/apt-archives
         sudo apt-get install --download-only -o Dir::Cache::Archives=/home/runner/apt-archives ${{ steps.packages.outputs.PACKAGES }}
-        sudo chown -Rv _apt:root /home/runner/apt-archives
+    - name: Install apt packages from cache
+      run: |
+        sudo chown -Rv _apt /home/runner/apt-archives
+        sudo apt-get install -o Dir::Cache::Archives=/home/runner/apt-archives ${{ steps.packages.outputs.PACKAGES }}
+        sudo chown -Rv runner /home/runner/apt-archives
     - name: Save apt archives cache
       uses: actions/cache/save@v4
       if: steps.cache-apt.outputs.cache-hit != 'true'
@@ -55,8 +59,6 @@ jobs:
         path: ~/apt-archives
         key: ${{ runner.os }}-apt-${{ hashFiles('package-lock.json', '*/package-lock.json') }}
 
-    - name: Install apt packages from cache
-      run: sudo apt-get install -o Dir::Cache::Archives=/home/runner/apt-archives ${{ steps.packages.outputs.PACKAGES }}
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps chromium
     - name: Run Auth Secret
