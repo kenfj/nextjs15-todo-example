@@ -26,7 +26,7 @@ jobs:
       id: cache-apt
       uses: actions/cache/restore@v4
       with:
-        path: /var/cache/apt/archives
+        path: ~/apt-archives
         key: ${{ runner.os }}-apt-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-apt-
@@ -35,14 +35,19 @@ jobs:
       run: npm ci
     - name: Install Playwright Dependencies (Dry Run)
       run: npx playwright install-deps chromium --dry-run
+    - name: Set package variable from dry run
+      id: packages
+      run: echo "PACKAGES=$(npx playwright install-deps chromium --dry-run | grep -oP '(?<=install -y --no-install-recommends ).*[^"]')" >> $GITHUB_OUTPUT
     - name: Download apt packages
-      run: sudo apt-get update && sudo apt-get install --download-only $(npx playwright install-deps chromium --dry-run | grep -oP '(?<=install -y --no-install-recommends ).*[^"]')
+      run: sudo apt-get update && sudo apt-get install --download-only -o Dir::Cache::Archives=~/apt-archives ${{ steps.packages.PACKAGES }}
     - name: Save apt archives cache
       uses: actions/cache/save@v4
       if: steps.cache-apt.outputs.cache-hit != 'true'
       with:
-        path: /var/cache/apt/archives
+        path: ~/apt-archives
         key: ${{ runner.os }}-apt-${{ hashFiles('**/package-lock.json') }}
+    - name: Install apt packages from cache
+      run: sudo apt-get install -o Dir::Cache::Archives=~/apt-archives ${{ steps.packages.PACKAGES }}
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps chromium
     - name: Run Auth Secret
