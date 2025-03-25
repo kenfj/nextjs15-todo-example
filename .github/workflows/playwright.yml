@@ -62,7 +62,7 @@ jobs:
         key: ${{ runner.os }}-apt-${{ hashFiles('package-lock.json', '*/package-lock.json') }}
 
     - name: Install Playwright Browsers
-      run: npx playwright install --with-deps chromium
+      run: npx playwright install --with-deps --no-shell chromium
     - name: Run Auth Secret
       run: npx auth secret
     - name: Run Playwright tests
