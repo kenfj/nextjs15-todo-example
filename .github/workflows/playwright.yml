@@ -53,7 +53,7 @@ jobs:
       if: steps.cache-apt.outputs.cache-hit != 'true'
       with:
         path: ${{ github.workspace }}/apt-archives
-        key: ${{ runner.os }}-apt-${{ hashFiles('**/package-lock.json') }}
+        key: ${{ runner.os }}-apt-${{ hashFiles('package-lock.json', '*/package-lock.json') }}
     - name: Install apt packages from cache
       run: sudo apt-get install -o Dir::Cache::Archives=${{ github.workspace }}/apt-archives ${{ steps.packages.outputs.PACKAGES }}
     - name: Install Playwright Browsers
