@@ -408,3 +408,26 @@ npx playwright codegen
 ```bash
 npm install -D @playwright/test@latest
 ```
+
+## Docker Playwright
+
+* run Playwright scripts in Docker environment
+    - https://playwright.dev/docs/docker
+
+```bash
+docker pull mcr.microsoft.com/playwright:v1.51.1-noble
+
+docker run -it --rm --ipc=host mcr.microsoft.com/playwright:v1.51.1-noble /bin/bash
+```
+
+* sample configurations for common CI providers
+    - https://playwright.dev/docs/ci#github-actions
+
+```bash
+docker build -t nextjs15-todo-example .
+
+docker run nextjs15-todo-example
+
+# debug
+docker run -it nextjs15-todo-example bash
+```
