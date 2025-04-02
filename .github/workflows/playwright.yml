@@ -19,6 +19,7 @@ jobs:
       with:
         push: false
         files: docker-compose.yml
+        targets: app
     - name: Run Playwright tests in Docker container
       run: docker-compose run --rm app
 
