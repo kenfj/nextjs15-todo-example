@@ -21,8 +21,8 @@ jobs:
         load: true
         push: false
         set: |
-          *.cache-from: type=gha
-          *.cache-to: type=gha,mode=max
+          *.cache-from=type=gha
+          *.cache-to=type=gha,mode=max
     - name: Run Playwright tests in Docker container
       run: docker compose run --rm app
 
