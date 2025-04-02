@@ -15,15 +15,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: docker/setup-buildx-action@v3
-    - uses: docker/build-push-action@v6
+    - uses: docker/bake-action@v6
       with:
-        load: true
         push: false
-        tags: nextjs15-todo-example:latest
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
+        files: docker-compose.yml
     - name: Run Playwright tests in Docker container
-      run: docker run --rm nextjs15-todo-example:latest
+      run: docker-compose run --rm app
 
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
