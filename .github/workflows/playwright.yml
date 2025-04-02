@@ -20,7 +20,6 @@ jobs:
       with:
         load: true
         push: false
-        files: compose.yaml
         set: |
           *.cache-from=type=gha
           *.cache-to=type=gha,mode=max
