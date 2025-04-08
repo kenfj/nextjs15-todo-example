@@ -1,5 +1,0 @@
-services:
-  app:
-    image: nextjs15-todo-example:latest
-    build:
-      context: .
