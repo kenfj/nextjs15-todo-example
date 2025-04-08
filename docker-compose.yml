@@ -35,6 +35,10 @@ services:
     working_dir: /app
     stdin_open: true # Keeps stdin open in case any prompts happen
     tty: true # Allocates a pseudo-terminal for output formatting
+  app:
+    image: nextjs15-todo-example:latest
+    build:
+      context: .
 
 volumes:
   postgres_data:
