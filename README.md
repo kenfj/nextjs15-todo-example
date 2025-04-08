@@ -424,9 +424,9 @@ docker run -it --rm --ipc=host mcr.microsoft.com/playwright:v1.51.1-noble /bin/b
     - https://playwright.dev/docs/ci#github-actions
 
 ```bash
-docker build -t nextjs15-todo-example .
+docker compose build app
 
-docker run nextjs15-todo-example
+docker compose up app
 
 # debug
 docker run -it nextjs15-todo-example bash
